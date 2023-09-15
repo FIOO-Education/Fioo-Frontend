@@ -4,9 +4,24 @@ import GradeCard from "@/components/GradeCard/GradeCard";
 import ProfileIcon from "@/components/ProfileIcon/ProfileIcon";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import styles from "./page.module.css";
+import SubjectsInfo from "@/components/SubjectInfo/SubjectInfo";
+import { colors } from "@/public/colors/colors";
 
 export default function Page() {
   const router = useRouter();
+  const [subjectsInfo, setSubjectsInfo] = useState([
+    {
+      name: "Língua Portuguesa",
+      description: "Vamos aprender como nossa língua é escrita!",
+      color: colors.green.radiant,
+    },
+    {
+      name: "Matemática Básica",
+      description: "Vamos aprender as contas básicas de essenciais!",
+      color: colors.pink.pastel,
+    },
+  ]);
   const [grades, setGrades] = useState([
     {
       subject: "Português",
@@ -50,8 +65,12 @@ export default function Page() {
     <div>
       <h3>E então, {"{Criança}"}</h3>
       <p>O que vamos estudar hoje?</p>
+      <div className={styles.subjects}>
+        {subjectsInfo.map((el) => (
+          <SubjectsInfo {...el} />
+          ))}
+      </div>
       <h3>Avaliações</h3>
-      <div className="subject-redirects"></div>
       <div
         style={{
           display: "flex",
