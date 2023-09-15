@@ -17,12 +17,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        style={{ margin: 0, padding: 0, boxSizing: "border-box" }}
+        style={{
+          margin: 0,
+          padding: 0,
+          boxSizing: "border-box",
+          backgroundColor: "#FFFFFF",
+        }}
         className={montserrat.className}
       >
-        <div style={{
-          padding: "0 25px 80px 14px",
-        }}>{children}</div>
+        <div
+          style={{
+            padding: "0 25px 80px 14px",
+          }}
+        >
+          {children}
+        </div>
         <Footer />
       </body>
     </html>
