@@ -27,7 +27,7 @@ export default function RootLayout({
       >
         <div
           style={{
-            padding: "0 25px 80px 14px",
+            padding: "0 14px 80px 14px",
           }}
         >
           {children}

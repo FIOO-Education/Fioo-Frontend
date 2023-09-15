@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 
 export const StyledGradeCard = styled("div")<{ color: string, darkColor: string }>((props) => ({
     position: "relative",
-    width: "80%",
+    width: "85%",
     height: "75px",
     borderRadius: "16px",
     padding: "8px 12px",
@@ -21,7 +21,8 @@ export const StyledGradeCard = styled("div")<{ color: string, darkColor: string 
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        gap: "5px"
+        gap: "5px",
+        width: "75%",
     },
     "& .subject-section": {
         fontWeight: "500",
