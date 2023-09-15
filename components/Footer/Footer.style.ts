@@ -11,6 +11,6 @@ export const StyledFooter = styled("footer")(({
     alignItems: "center",
     boxShadow: "0px -2px 10px rgba(0, 0, 0, 0.1)",
     borderRadius: "24px 24px 0 0",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#F8F8F8",
     zIndex: 2,
 }))
