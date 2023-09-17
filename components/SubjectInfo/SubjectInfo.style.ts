@@ -11,6 +11,7 @@ export const StyledSubjectsInfo = styled("div")<{ color: string }>((props) => ({
     borderRadius: "24px",
     boxShadow: "4px 4px 12px 1px rgba(0, 0, 0, 0.15)",
     border: `2px solid ${props.color}`,
+    userSelect: "none",
     "& .subject-info-title": {
         fontSize: "18px",
         fontWeight: 600,

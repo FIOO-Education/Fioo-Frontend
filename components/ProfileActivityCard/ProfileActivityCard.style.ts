@@ -7,6 +7,7 @@ export const StyledProfileActivityCard = styled("div")<{ color: string }>((props
     borderRadius: "24px",
     padding: "8px 12px",
     backgroundColor: props.color,
+    userSelect: "none",
     "& > p": {
         margin: "8px"
     }

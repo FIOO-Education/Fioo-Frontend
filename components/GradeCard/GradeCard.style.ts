@@ -12,6 +12,7 @@ export const StyledGradeCard = styled("div")<{ color: string, darkColor: string 
     justifyContent: "center",
     alignItems: "center",
     color: colors.black,
+    userSelect: "none",
     "& .subject-title": {
         fontSize: "22px",
         fontWeight: "600",
