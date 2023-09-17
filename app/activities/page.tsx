@@ -7,6 +7,7 @@ import { useState } from "react";
 import styles from "./page.module.css";
 import SubjectsInfo from "@/components/SubjectInfo/SubjectInfo";
 import { colors } from "@/public/colors/colors";
+import PageTitle from "@/components/PageTitle/PageTitle";
 
 export default function Page() {
   const router = useRouter();
@@ -63,8 +64,7 @@ export default function Page() {
 
   return (
     <div>
-      <h3>E então, {"{Criança}"}</h3>
-      <p>O que vamos estudar hoje?</p>
+      <PageTitle title="E então, {Criança}" text="O que vamos estudar hoje?" />
       <div className={styles.subjects}>
         {subjectsInfo.map((el) => (
           <SubjectsInfo key={el.name} {...el} />
@@ -85,7 +85,6 @@ export default function Page() {
         ))}
       </div>
       <h4 style={{ textAlign: "center" }}>Isso é tudo!</h4>
-      <ProfileIcon onClick={() => router.push("/profile")} size="small" />
     </div>
   );
 }
