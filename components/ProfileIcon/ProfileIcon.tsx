@@ -1,6 +1,7 @@
 "use client";
 
 import { useChildStore } from "@/stores/use-profile";
+import Image from "next/image";
 import { MouseEventHandler, useEffect, useState } from "react";
 
 interface ProfileIconProps {
@@ -23,24 +24,27 @@ export default function ProfileIcon({ size, src, onClick }: ProfileIconProps) {
 
   if (size === "big") {
     return (
-      <img
-        style={{ width: "210px", height: "210px" }}
+      <Image
         onClick={onClick}
         src={currentSource}
+        alt="Ícone do usuário"
+        width={210}
+        height={210}
       />
     );
   } else {
     return (
-      <img
+      <Image
         style={{
-          width: "40px",
-          height: "40px",
           position: "absolute",
           top: "25px",
           right: "25px",
         }}
         onClick={onClick}
         src={currentSource}
+        alt="Ícone do usuário"
+        width={40}
+        height={40}
       />
     );
   }
