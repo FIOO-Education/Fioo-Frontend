@@ -7,6 +7,7 @@
     height: 175px;
     display: flex;
     gap: 14px;
+    overflow: hidden;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -17,6 +18,7 @@
     height: 330px;
     display: flex;
     gap: 14px;
+    overflow: hidden;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
