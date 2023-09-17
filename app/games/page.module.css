@@ -10,6 +10,7 @@
   overflow-y: hidden;
   overflow-x: auto;
   white-space: nowrap;
+  padding-bottom: 15px;
 }
 
 .suggestions {
