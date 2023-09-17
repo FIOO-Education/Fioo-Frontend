@@ -33,11 +33,13 @@ export default function Page() {
       title: "Tarefas",
       description: "Que tal algumas atividades?",
       theme: "green",
+      redirect: "/activities"
     },
     {
       title: "Jogos",
       description: "Que tal alguns jogos divertidos?",
       theme: "pink",
+      redirect: "/games"
     },
   ]);
 

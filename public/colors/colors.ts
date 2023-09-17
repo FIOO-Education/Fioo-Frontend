@@ -16,6 +16,7 @@ export const colors = {
     },
     pink: {
         dark: "#B67BAD",
+        radiant: "#FAA9ED",
         pastel: "#FFE1FF"
     },
     black: "#413752",
