@@ -8,6 +8,7 @@
     display: flex;
     gap: 14px;
     overflow-y: hidden;
+    overflow-x: hidden;
     white-space: nowrap;
 }
 
@@ -17,6 +18,7 @@
     display: flex;
     gap: 14px;
     overflow-y: hidden;
+    overflow-x: hidden;
     white-space: nowrap;
     margin-bottom: 30px;
 }
