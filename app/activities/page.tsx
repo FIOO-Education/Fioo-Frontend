@@ -67,7 +67,7 @@ export default function Page() {
       <p>O que vamos estudar hoje?</p>
       <div className={styles.subjects}>
         {subjectsInfo.map((el) => (
-          <SubjectsInfo {...el} />
+          <SubjectsInfo key={el.name} {...el} />
           ))}
       </div>
       <h3>Avaliações</h3>
