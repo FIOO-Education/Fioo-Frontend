@@ -7,7 +7,6 @@ import HomeIconSelected from "@/public/images/home-icon-selected.svg";
 import CatalogIconSelected from "@/public/images/catalog-icon-selected.svg";
 import StarIconSelected from "@/public/images/star-icon-selected.svg";
 import ProfileIconSelected from "@/public/images/profile-icon-selected.svg";
-import { useChildStore } from "@/stores/use-profile";
 
 export default function FooterAction({ src, route, active }: FooterActions) {
   const router = useRouter();
