@@ -1,3 +1,5 @@
+"use client";
+
 import { colors } from "@/public/colors/colors";
 import Title from "../Title/Title";
 import {
@@ -8,21 +10,27 @@ import {
 import Mascote from "@/public/images/mascote2.svg";
 import GreenArrow from "@/public/images/green-arrow.svg";
 import PinkArrow from "@/public/images/pink-arrow.svg";
+import { useRouter } from "next/navigation";
 
 interface ProfileActivityCardProps {
   title: string;
   description: string;
   theme: string;
+  redirect: string;
 }
 
 export default function ProfileActivityCard({
   title,
   description,
   theme,
+  redirect
 }: ProfileActivityCardProps) {
+  const router = useRouter();
+
   return (
     <StyledProfileActivityCard
       color={theme === "green" ? colors.green.pastel : colors.pink.pastel}
+      onClick={() => router.push(redirect)}
     >
       <Title text={title} size="24px" theme={colors.black} />
       <p

@@ -1,18 +1,32 @@
-import ProfileImage from "@/public/images/profile-image.png";
-import { MouseEventHandler } from "react";
+"use client";
+
+import { useChildStore } from "@/stores/use-profile";
+import { MouseEventHandler, useEffect, useState } from "react";
 
 interface ProfileIconProps {
   size: "big" | "small";
+  src?: string;
   onClick?: MouseEventHandler<HTMLImageElement>;
 }
 
-export default function ProfileIcon({ size, onClick }: ProfileIconProps) {
+export default function ProfileIcon({ size, src, onClick }: ProfileIconProps) {
+  const userIcon = useChildStore((s) => s.userIcon);
+  const [currentSource, setCurrentSource] = useState("");
+
+  useEffect(() => {
+    if(!src) {
+      setCurrentSource(userIcon);
+    } else {
+      setCurrentSource(src);
+    }
+  }, [src]);
+
   if (size === "big") {
     return (
       <img
         style={{ width: "210px", height: "210px" }}
         onClick={onClick}
-        src={ProfileImage.src}
+        src={currentSource}
       />
     );
   } else {
@@ -26,7 +40,7 @@ export default function ProfileIcon({ size, onClick }: ProfileIconProps) {
           right: "25px",
         }}
         onClick={onClick}
-        src={ProfileImage.src}
+        src={currentSource}
       />
     );
   }

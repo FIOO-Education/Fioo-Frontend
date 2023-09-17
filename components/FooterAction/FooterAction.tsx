@@ -7,7 +7,6 @@ import HomeIconSelected from "@/public/images/home-icon-selected.svg";
 import CatalogIconSelected from "@/public/images/catalog-icon-selected.svg";
 import StarIconSelected from "@/public/images/star-icon-selected.svg";
 import ProfileIconSelected from "@/public/images/profile-icon-selected.svg";
-import { useChildStore } from "@/stores/use-profile";
 
 export default function FooterAction({ src, route, active }: FooterActions) {
   const router = useRouter();
@@ -44,7 +43,7 @@ export default function FooterAction({ src, route, active }: FooterActions) {
       width="32px"
       height="32px"
       src={handleGetSource()}
-      style={{ cursor: "pointer" }}
+      style={{ cursor: "pointer", userSelect: "none" }}
       alt={route.charAt(0)}
       onClick={handleOnClick}
     />
