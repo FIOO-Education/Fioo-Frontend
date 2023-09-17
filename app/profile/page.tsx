@@ -9,7 +9,6 @@ import { colors } from "@/public/colors/colors";
 import ConfigIcon from "@/public/images/config-icon.svg";
 import ProfileActivityCard from "@/components/ProfileActivityCard/ProfileActivityCard";
 import { useRouter, usePathname } from "next/navigation";
-import Image from "next/image";
 
 export default function Page() {
   const router = useRouter();
@@ -34,13 +33,13 @@ export default function Page() {
       title: "Tarefas",
       description: "Que tal algumas atividades?",
       theme: "green",
-      redirect: "/activities",
+      redirect: "/activities"
     },
     {
       title: "Jogos",
       description: "Que tal alguns jogos divertidos?",
       theme: "pink",
-      redirect: "/games",
+      redirect: "/games"
     },
   ]);
 
@@ -65,13 +64,7 @@ export default function Page() {
           padding: "8px",
         }}
       >
-        <Image
-          src={ConfigIcon.src}
-          alt="Config Icon"
-          width={27}
-          height={27}
-          onClick={() => router.push(pathName + "/config")}
-        />
+        <img src={ConfigIcon.src} onClick={() => router.push(pathName + "/config")} />
       </div>
     </div>
   );

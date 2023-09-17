@@ -11,7 +11,6 @@ import Mascote from "@/public/images/mascote2.svg";
 import GreenArrow from "@/public/images/green-arrow.svg";
 import PinkArrow from "@/public/images/pink-arrow.svg";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 interface ProfileActivityCardProps {
   title: string;
@@ -24,7 +23,7 @@ export default function ProfileActivityCard({
   title,
   description,
   theme,
-  redirect,
+  redirect
 }: ProfileActivityCardProps) {
   const router = useRouter();
 
@@ -47,12 +46,7 @@ export default function ProfileActivityCard({
         color={theme === "green" ? colors.green.dark : colors.pink.dark}
       >
         <span>Vamos lá!</span>
-        <Image
-          src={theme === "green" ? GreenArrow.src : PinkArrow.src}
-          alt="Redirect Arrow"
-          width={18}
-          height={11}
-        />
+        <img src={theme === "green" ? GreenArrow.src : PinkArrow.src} />
       </StyledText>
       <StyledImage src={Mascote.src} />
     </StyledProfileActivityCard>

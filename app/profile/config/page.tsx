@@ -41,7 +41,7 @@ export default function Page() {
           <h3>Configurações</h3>
       </section>
       <section className={styles.options}>
-        {options.map((el) => <ConfigOption key={el.text} {...el} />)}
+        {options.map((el) => <ConfigOption {...el} />)}
       </section>
     </div>
   );
