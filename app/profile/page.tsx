@@ -64,7 +64,7 @@ export default function Page() {
           padding: "8px",
         }}
       >
-        <img src={ConfigIcon.src} onClick={() => router.push(pathName + "/config")} />
+        <img src={ConfigIcon.src} style={{ userSelect: "none" }} onClick={() => router.push(pathName + "/config")} />
       </div>
     </div>
   );
