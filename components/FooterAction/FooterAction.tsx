@@ -39,14 +39,13 @@ export default function FooterAction({ src, route, active }: FooterActions) {
   }, [route, router, pathname]);
 
   return (
-    <button onClick={handleOnClick}>
-      <img
-        width="32px"
-        height="32px"
-        src={handleGetSource()}
-        style={{ cursor: "pointer", userSelect: "none" }}
-        alt={route.charAt(0)}
-      />
-    </button>
+    <img
+      width="32px"
+      height="32px"
+      src={handleGetSource()}
+      style={{ cursor: "pointer", userSelect: "none" }}
+      alt={route.charAt(0)}
+      onClick={handleOnClick}
+    />
   );
 }
