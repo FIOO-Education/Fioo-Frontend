@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { StyledGameCard } from "./GameCard.style";
 import { colors } from "@/public/colors/colors";
+import { useRouter } from "next/navigation";
 
 interface GameCard {
     title: string;
@@ -9,6 +10,8 @@ interface GameCard {
 }
 
 export default function GameCard({ title, icon, size }: GameCard) {
+    const router = useRouter();
+
     const getRandomColor = useCallback(() => {
         const random = Math.random();
         if (random <= 0.25) {
@@ -23,7 +26,7 @@ export default function GameCard({ title, icon, size }: GameCard) {
       }, []);
 
     return (
-        <StyledGameCard color={getRandomColor()} size={size}>
+        <StyledGameCard color={getRandomColor()} size={size} onClick={() => router.push("/games/steps")}>
             <img src={icon} alt={title + "Icon"} />
             <p>{title}</p>
         </StyledGameCard>
