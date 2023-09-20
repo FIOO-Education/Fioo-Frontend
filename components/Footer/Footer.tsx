@@ -38,8 +38,11 @@ export default function Footer() {
         active: false,
       },
     ];
-    let currentPage = tempFooterActions.find(el => el.route === pathName);
-    if(currentPage) {
+    const rootPath = pathName.split("/").filter((el) => el !== "")[0];
+    let currentPage = tempFooterActions.find(
+      (el) => el.route.replace("/", "") === rootPath
+    );
+    if (currentPage) {
       currentPage.active = true;
     }
     setFooterActions([...tempFooterActions]);
@@ -49,8 +52,8 @@ export default function Footer() {
     let tempFooterActions = [...footerActions];
     let oldPage = tempFooterActions.find((el) => el.active);
     let newPage = tempFooterActions.find((el) => el.route === pathName);
-    if(newPage) {
-      if(oldPage) {
+    if (newPage) {
+      if (oldPage) {
         oldPage.active = false;
       }
       newPage.active = true;
