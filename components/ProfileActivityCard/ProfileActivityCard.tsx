@@ -17,19 +17,22 @@ interface ProfileActivityCardProps {
   description: string;
   theme: string;
   redirect: string;
+  center?: boolean;
 }
 
 export default function ProfileActivityCard({
   title,
   description,
   theme,
-  redirect
+  redirect,
+  center
 }: ProfileActivityCardProps) {
   const router = useRouter();
 
   return (
     <StyledProfileActivityCard
       color={theme === "green" ? colors.green.pastel : colors.pink.pastel}
+      style={{ margin: center ? "auto" : 0 }}
       onClick={() => router.push(redirect)}
     >
       <Title text={title} size="24px" theme={colors.black} />

@@ -10,12 +10,12 @@ interface ConfigOptionProps {
 
 export default function ConfigOption({ icon, text, onClick }: ConfigOptionProps) {
   return (
-    <StyledConfigOption>
+    <StyledConfigOption onClick={onClick}>
       <span>
           <Image src={icon} alt={text + "Icon"} width={25} height={25} />
           <p>{text}</p>
       </span>
-      <Image onClick={onClick} src={Arrow.src} alt="Arrow Icon" width={20} height={20} />
+      <Image src={Arrow.src} alt="Arrow Icon" width={20} height={20} />
     </StyledConfigOption>
   );
 }

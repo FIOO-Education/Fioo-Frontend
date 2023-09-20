@@ -7,6 +7,7 @@ export const StyledConfigOption = styled("div")(({
     alignItems: "center",
     fontWeight: "600",
     fontSize: "18px",
+    userSelect: "none",
     "& > span": {
         display: "flex",
         alignItems: "center",

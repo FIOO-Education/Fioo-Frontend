@@ -1,0 +1,38 @@
+.game_page {
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+.recent_played {
+  width: auto;
+  height: 175px;
+  display: flex;
+  gap: 14px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 15px;
+}
+
+.suggestions {
+  width: auto;
+  height: 330px;
+  display: flex;
+  gap: 14px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-bottom: 30px;
+}
+
+.recent_played::-webkit-scrollbar, .suggestions::-webkit-scrollbar {
+  width: 0px;
+}
+
+.recent_played::-webkit-scrollbar-track, .suggestions::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.recent_played::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb {
+    background: transparent;
+}

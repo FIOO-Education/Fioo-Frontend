@@ -11,7 +11,7 @@ export const colors = {
     },
     yellow: {
         dark: "#C5AB67",
-
+        radiant: "#FFCD4D",
         pastel: "#F9EBC7",
     },
     pink: {

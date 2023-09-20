@@ -22,12 +22,14 @@ export default function GradeCard({
 
   const getRandomColor = useCallback(() => {
     const random = Math.random();
-    if (random <= 0.33) {
+    if (random <= 0.25) {
       return [colors.blue.pastel, colors.blue.dark];
-    } else if (random <= 0.66) {
+    } else if (random <= 0.50) {
         return [colors.yellow.pastel, colors.yellow.dark];
-    } else {
+    } else if(random <= 0.75) {
         return [colors.green.pastel, colors.green.dark];
+    } else {
+      return [colors.pink.pastel, colors.pink.dark];
     }
   }, []);
 
