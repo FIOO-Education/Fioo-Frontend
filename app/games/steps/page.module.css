@@ -1,0 +1,22 @@
+.paths {
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom_text {
+    text-align: center;
+    width: 75%;
+    font-size: 18px;
+    margin: 20px auto;
+}
+
+.steps_title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.steps_text {
+    width: 70%;
+    margin: 0 0 20px 0;
+}
