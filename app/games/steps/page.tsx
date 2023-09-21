@@ -51,7 +51,7 @@ export default function Page() {
     if (path) {
       setCurrentIndex(paths.indexOf(path));
     }
-  }, [paths]);
+  }, []);
 
   return (
     <div>
