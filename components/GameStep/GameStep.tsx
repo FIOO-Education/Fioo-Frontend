@@ -3,24 +3,25 @@ import { StyledGameStep } from "./GameStep.style";
 import { useEffect, useState } from "react";
 
 interface GameStepProps {
-    index: number;
+  index: number;
+  onClick: (index: number) => void;
 }
 
-export default function GameStep({ index }: GameStepProps) {
-    const game = useChildStore((s) => s.game);
-    const [answered, setAnswered] = useState<boolean | null>(null);
+export default function GameStep({ index, onClick }: GameStepProps) {
+  const game = useChildStore((s) => s.game);
+  const [answered, setAnswered] = useState<boolean | null>(null);
 
-    useEffect(() => {
-        setAnswered(index <= game.currentQuestion);
-    }, [game]);
+  useEffect(() => {
+    setAnswered(index <= game.maxQuestionReached);
+  }, [game]);
 
-    if(answered === null) {
-        return null;
-    }
+  if (answered === null) {
+    return null;
+  }
 
-    return (
-        <StyledGameStep answered={answered}>
-            <p>{index}</p>
-        </StyledGameStep>
-    );  
+  return (
+    <StyledGameStep onClick={() => onClick(index)} answered={answered}>
+      <p>{index}</p>
+    </StyledGameStep>
+  );
 }

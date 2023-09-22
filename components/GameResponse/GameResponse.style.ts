@@ -17,5 +17,9 @@ export const StyledGameResponse = styled("div")(({
     },
     "& > img": {
         margin: "20px 0",
+        borderRadius: "16px",
+        position: "relative",
+        left: "50%",
+        transform: "translate(-50%, 0)",
     }
 }));

@@ -14,7 +14,7 @@ export default function Page() {
   const game = useChildStore((s) => s.game)
   const setGame = useChildStore((s) => s.setGame)
   const setOptionSelected = useChildStore((s) => s.setOptionSelected)
-  const setGamePoints = useChildStore((s) => s.setGamePoints)
+  const setAnswers = useChildStore((s) => s.setAnswers)
 
   const [paths, setPaths] = useState([
     {
@@ -53,13 +53,14 @@ export default function Page() {
   useEffect(() => {
     let tempGame = {...game};
     tempGame.currentQuestion = 1;
+    tempGame.maxQuestionReached = 1;
     const path = paths.find((el) => el.current);
     if (path) {
       setCurrentIndex(paths.indexOf(path));
     }
     setOptionSelected({ selected: null, correctOption: false });
     setGame(tempGame);
-    setGamePoints(0);
+    setAnswers([]);
   }, []);
 
   return (
