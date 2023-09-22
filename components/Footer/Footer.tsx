@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { StyledFooter } from "./Footer.style";
-import { useChildStore } from "@/stores/use-profile";
+import { useChildStore } from "@/stores/use-child";
 import HomeIcon from "@/public/images/home-icon.svg";
 import CatalogIcon from "@/public/images/catalog-icon.svg";
 import StarIcon from "@/public/images/star-icon.svg";
@@ -50,8 +50,10 @@ export default function Footer() {
 
   useEffect(() => {
     let tempFooterActions = [...footerActions];
+    const rootPath = "/" + pathName.split("/").filter((el) => el !== "")[0];
     let oldPage = tempFooterActions.find((el) => el.active);
-    let newPage = tempFooterActions.find((el) => el.route === pathName);
+    let newPage = tempFooterActions.find((el) => el.route === rootPath);
+
     if (newPage) {
       if (oldPage) {
         oldPage.active = false;

@@ -20,4 +20,9 @@ export const colors = {
         pastel: "#FFE1FF"
     },
     black: "#413752",
+    gray: {
+        normal: "#B2B7BF",
+        dark: "#8D8A93",
+    },
+    white: "#F8F8F8",
 }

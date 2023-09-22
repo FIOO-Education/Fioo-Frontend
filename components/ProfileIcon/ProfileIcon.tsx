@@ -1,6 +1,6 @@
 "use client";
 
-import { useChildStore } from "@/stores/use-profile";
+import { useChildStore } from "@/stores/use-child";
 import { MouseEventHandler, useEffect, useState } from "react";
 
 interface ProfileIconProps {
