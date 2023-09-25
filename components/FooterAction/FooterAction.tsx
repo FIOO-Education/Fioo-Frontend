@@ -33,9 +33,7 @@ export default function FooterAction({ src, route, active }: FooterActions) {
 
   const handleOnClick = useCallback(() => {
     const rootPath = pathname.split("/").filter((el) => el !== "")[0];
-    if (route.replace("/", "") !== rootPath) {
-      router.push(route);
-    }
+    router.push(route);
   }, [route, router, pathname]);
 
   return (

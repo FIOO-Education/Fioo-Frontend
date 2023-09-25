@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer/Footer";
+import { colors } from "@/public/colors/colors";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
@@ -21,7 +22,7 @@ export default function RootLayout({
           margin: 0,
           padding: 0,
           boxSizing: "border-box",
-          backgroundColor: "#F8F8F8",
+          backgroundColor: colors.white,
         }}
         className={montserrat.className}
       >
