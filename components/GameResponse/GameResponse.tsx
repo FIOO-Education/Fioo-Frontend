@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { MouseEventHandler, useEffect, useState } from "react";
 import { useChildStore } from "@/stores/use-child";
 import GameOptionCard from "../GameOptionCard/GameOptionCard";
@@ -24,10 +23,10 @@ export default function GameResponse({ onClick }: GameResponseProps) {
 
   return (
     <StyledGameResponse>
-      <Image
+      <img
         src={game.currentGame.questions[currentQuestion].imgSrc}
         alt="Game Image"
-        width={360}
+        width="95%"
         height={200}
       />
       <p className="question-title">

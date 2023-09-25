@@ -1,4 +1,4 @@
-import { FooterActions, Game, SelectedOption } from "@/public/entities/entities";
+import { Answer, FooterActions, Game, SelectedOption } from "@/public/entities/entities";
 import { create } from "zustand";
 import UserIcon from "@/public/images/profile-image.png";
 import Cachorro from "@/public/images/cachorro.png";
@@ -20,8 +20,8 @@ interface ChildStore {
     optionSelected: SelectedOption;
     setOptionSelected: (optionSelected: SelectedOption) => void;
 
-    gamePoints: number;
-    setGamePoints: (gamePoints: number) => void;
+    answers: Answer[];
+    setAnswers: (answers: Answer[]) => void;
 } 
 
 export const useChildStore = create<ChildStore>((set) => ({
@@ -147,14 +147,15 @@ export const useChildStore = create<ChildStore>((set) => ({
                 },
             ]
         },
-        currentQuestion: 1
+        currentQuestion: 1,
+        maxQuestionReached: 1
     },
     setGame: (game) => set({ game }),
     optionSelected: { selected: null, correctOption: false },
     setOptionSelected: (optionSelected) => set({ optionSelected }),
 
-    gamePoints: 0,
-    setGamePoints: (gamePoints) => set({ gamePoints }),
+    answers: [],
+    setAnswers: (answers) => set({ answers }),
 
 
 }))

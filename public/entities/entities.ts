@@ -21,9 +21,14 @@ export interface Game {
         questions: GameQuestion[];
     };
     currentQuestion: number;
+    maxQuestionReached: number;
 }
 
 export interface SelectedOption {
     selected: number | null;
     correctOption: boolean;
+}
+
+export interface Answer {
+    questionId: number;
 }

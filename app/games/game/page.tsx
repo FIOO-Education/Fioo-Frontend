@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import styles from "./page.module.css";
 import BackButton from "@/components/BackButton/BackButton";
 import { useRouter } from "next/navigation";
@@ -15,12 +15,32 @@ export default function Page() {
   const setGame = useChildStore((s) => s.setGame);
   const optionSelected = useChildStore((s) => s.optionSelected);
   const setOptionSelected = useChildStore((s) => s.setOptionSelected);
-  const gamePoints = useChildStore((s) => s.gamePoints);
-  const setGamePoints = useChildStore((s) => s.setGamePoints);
+  const answers = useChildStore((s) => s.answers);
+  const setAnswers = useChildStore((s) => s.setAnswers);
+
+  const handleStepClick = useCallback(
+    (index: number) => {
+      if (index <= game.maxQuestionReached) {
+        let tempGame = { ...game };
+        tempGame.currentQuestion = index;
+        setGame(tempGame);
+      }
+    },
+    [game, setGame]
+  );
 
   const goToNextQuestion = useCallback(() => {
-    if (optionSelected.correctOption) {
-      setGamePoints(gamePoints + 1);
+    const alreadyExists = answers.find(
+      (el) => el.questionId === game.currentQuestion
+    );
+
+    if (optionSelected.correctOption && alreadyExists === undefined) {
+      setAnswers([...answers, { questionId: game.currentQuestion }]);
+    } else if (!optionSelected.correctOption && alreadyExists !== undefined) {
+      let tempAnswers = [...answers].filter(
+        (el) => el.questionId !== game.currentQuestion
+      );
+      setAnswers(tempAnswers);
     }
 
     if (optionSelected.selected === null) {
@@ -35,7 +55,15 @@ export default function Page() {
       tempOptionSelected.selected = null;
       setOptionSelected(tempOptionSelected);
     }
-  }, [game, setGame, optionSelected, gamePoints, setGamePoints]);
+  }, [game, setGame, optionSelected, answers, setAnswers]);
+
+  useEffect(() => {
+    if (game.currentQuestion > game.maxQuestionReached) {
+      let tempGame = { ...game };
+      tempGame.maxQuestionReached = game.currentQuestion;
+      setGame(tempGame);
+    }
+  }, [game.currentQuestion]);
 
   // if (game.currentGame. === null) {
   //   router.push("/games/steps");
@@ -43,7 +71,7 @@ export default function Page() {
   // }
 
   return (
-    <div>
+    <div className={styles.game_page_wrapper}>
       <BackButton onClick={() => router.push("/games/steps")} fixed />
       <p
         style={{
@@ -66,7 +94,11 @@ export default function Page() {
       <section className={styles.game_step}>
         <hr />
         {game.currentGame.questions.map((el, index) => (
-          <GameStep key={el.question} index={index + 1} />
+          <GameStep
+            onClick={handleStepClick}
+            key={el.question}
+            index={index + 1}
+          />
         ))}
       </section>
       <GameResponse onClick={goToNextQuestion} />

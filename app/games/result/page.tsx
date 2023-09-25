@@ -7,12 +7,14 @@ import { useEffect } from "react";
 export default function Page() {
     const router = useRouter();
     const game = useChildStore((s) => s.game);
-    const gamePoints = useChildStore((s) => s.gamePoints);
+    const answers = useChildStore((s) => s.answers);
 
     useEffect(() => {
-        if(game.currentGame.id === null) {
-            router.push("/games/steps");
-        }
+        // if(game.currentGame.id === null) {
+        //     router.push("/games/steps");
+        // }
+
+        console.log(answers);
     }, []);
 
     if(game.currentGame.id === null) {
@@ -20,6 +22,6 @@ export default function Page() {
     }
 
     return (
-        <div>Você acertou {gamePoints} de {game.currentGame.questions.length} questões!</div>
+        <div>Você acertou {answers.length} de {game.currentGame.questions.length} questões!</div>
     );
 }
