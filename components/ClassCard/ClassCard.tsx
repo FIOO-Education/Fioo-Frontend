@@ -12,7 +12,7 @@ const ClassCard = (props: Class) => {
     const pathname = usePathname();
     const { setCurrentClass } = useChildStore(state => state);
     const { subject, title, viewed } = props;
-
+ 
     const handleClick = useCallback(() => {
         if(viewed) {
             setCurrentClass(props);
