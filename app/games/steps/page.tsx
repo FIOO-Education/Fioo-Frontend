@@ -66,7 +66,7 @@ export default function Page() {
   return (
     <div>
       <span className={styles.steps_title}>
-      <BackButton onClick={() => router.push("/games")} />
+      <BackButton color="blue" onClick={() => router.push("/games")} />
         <h3>Que tal um jogo?</h3>
       </span>
       <p className={styles.steps_text}>Hoje é dia de aprender alguma coisa nova!</p>
