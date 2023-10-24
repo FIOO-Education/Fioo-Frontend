@@ -72,7 +72,7 @@ export default function Page() {
 
   return (
     <div className={styles.game_page_wrapper}>
-      <BackButton onClick={() => router.push("/games/steps")} fixed />
+      <BackButton color="blue" onClick={() => router.push("/games/steps")} fixed />
       <p
         style={{
           color: colors.black,
