@@ -1,7 +1,9 @@
 import { styled } from "@mui/system";
 
 export const StyledTitle = styled("p")<{ size: string; color: string, centered: boolean }>((props) => ({
-    width: props.centered ? "75%" : "auto",
+    display: "flex",
+    justifyContent: props.centered ? "center" : "start",
+    width: "75%",
     textAlign: "center",
     fontSize: props.size,
     fontWeight: "bolder",

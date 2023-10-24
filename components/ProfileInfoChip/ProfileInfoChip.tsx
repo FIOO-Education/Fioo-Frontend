@@ -25,8 +25,9 @@ export default function ProfileInfoChip({
         theme={
           theme === "blue" ? colors.blue.dark : colors.green.dark
         }
+        centered
       />
-      <Title text={title} size="16px" theme={colors.black} />
+      <Title text={title} size="16px" theme={colors.black} centered />
       <p style={{
         color: colors.black,
         fontSize: "12px",
