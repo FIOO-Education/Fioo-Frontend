@@ -9,8 +9,8 @@ interface TitleProps {
 
 export default function Title({ text, size, theme, centered }: TitleProps) {
     return (
-        <StyledTitle size={size} color={theme} centered >
-            {text}
+        <StyledTitle size={size} color={theme} centered={centered === undefined ? false : true} >
+            <span>{text}</span>
         </StyledTitle>
     );
 }

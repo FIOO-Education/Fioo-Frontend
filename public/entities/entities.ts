@@ -32,3 +32,13 @@ export interface SelectedOption {
 export interface Answer {
     questionId: number;
 }
+
+export interface Class {
+    codClass: number;
+    nameClass: string;
+    title: string;
+    description: string;
+    videoLink: string;
+    subject: string;
+    viewed: boolean;
+}

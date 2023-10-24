@@ -1,7 +1,6 @@
 "use client";
 
 import GradeCard from "@/components/GradeCard/GradeCard";
-import ProfileIcon from "@/components/ProfileIcon/ProfileIcon";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./page.module.css";
@@ -13,11 +12,13 @@ export default function Page() {
   const router = useRouter();
   const [subjectsInfo, setSubjectsInfo] = useState([
     {
+      id: 1,
       name: "Língua Portuguesa",
       description: "Vamos aprender como nossa língua é escrita!",
       color: colors.green.radiant,
     },
     {
+      id: 2,
       name: "Matemática Básica",
       description: "Vamos aprender as contas básicas de essenciais!",
       color: colors.pink.pastel,
