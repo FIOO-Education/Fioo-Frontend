@@ -44,7 +44,7 @@ export default function Page() {
 
   return (
     <div>
-      <BackButton onClick={() => router.push("/profile/config")} fixed />
+      <BackButton color="blue" onClick={() => router.push("/profile/config")} fixed />
       <p className={styles.icon_title}>Alterar foto de perfil</p>
       <section className={styles.icon_changer}>
         <ProfileIcon size="big" src={icons[currentIndex]} />
