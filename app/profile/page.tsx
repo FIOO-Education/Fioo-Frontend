@@ -46,7 +46,7 @@ export default function Page() {
   return (
     <div className="profile-page">
       <ProfileIcon size="big" />
-      <Title text="{Criança}" size="28px" theme={colors.black} />
+      <Title text="{Criança}" size="28px" theme={colors.black} centered />
       <div className="child-info">
         {...info.map((el) => <ProfileInfoChip key={el.title} {...el} />)}
       </div>

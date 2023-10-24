@@ -8,6 +8,7 @@ import { useState } from "react";
 import GameCard from "@/components/GameCard/GameCard";
 import styles from "../games/page.module.css";
 import ProfileActivityCard from "@/components/ProfileActivityCard/ProfileActivityCard";
+import ExerciseCard from "@/components/ExerciseCard/ExerciseCard";
 
 export default function Page() {
   const [recentPlayed, setRecentPlayed] = useState([
@@ -39,10 +40,10 @@ export default function Page() {
     },
   ]);
   const [continuePlaying, setContinuePlaying] = useState({
+    codClass: 1,
     subject: "Matemática",
-    section: "Soma",
-    content: "O que são números",
-    percentage: 75,
+    title: "Soma",
+    nameClass: "O que são números"
   });
 
   return (
@@ -52,12 +53,7 @@ export default function Page() {
         text="Hoje é um ótimo dia para se divertir aprendendo!"
       />
       <h3>Continue seu exercício:</h3>
-      <div>
-        <section>
-          <h3>{continuePlaying.subject}</h3>
-          <span>{continuePlaying.section} | {continuePlaying.content}</span>
-        </section>
-      </div>
+      <ExerciseCard {...continuePlaying} />
       <h3>Jogados recentemente</h3>
       <section className={styles.recent_played}>
         {recentPlayed.map((el, index) => (
