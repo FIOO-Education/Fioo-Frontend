@@ -2,32 +2,26 @@
 
 import ProfileIcon from "@/components/ProfileIcon/ProfileIcon";
 import "./page.style.css";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ProfileInfoChip from "@/components/ProfileInfoChip/ProfileInfoChip";
 import Title from "@/components/Title/Title";
 import { colors } from "@/public/colors/colors";
 import ConfigIcon from "@/public/images/config-icon.svg";
 import ProfileActivityCard from "@/components/ProfileActivityCard/ProfileActivityCard";
 import { useRouter, usePathname } from "next/navigation";
+import { useChildStore } from "@/stores/use-child";
+import { doGetConsecutiveDays } from "@/utils/req/do-get-consecutive-days";
 
 export default function Page() {
   const router = useRouter();
   const pathName = usePathname();
-  const [info, setInfo] = useState([
-    {
-      number: 10,
-      title: "Dias seguidos",
-      description: "Jogando, aprendendo e se divertindo dentro do FIOO.",
-      theme: "blue",
-    },
-    {
-      number: 13,
-      title: "Atividades",
-      description: "Já realizadas e aprendidas dentro do FIOO.",
-      theme: "green",
-    },
-  ]);
-
+  const { student } = useChildStore();
+  const [info, setInfo] = useState<{
+    number: number;
+    title: string;
+    description: string;
+    theme: string;
+  }[]>([]);
   const [activity, setActivity] = useState([
     {
       title: "Tarefas",
@@ -43,10 +37,33 @@ export default function Page() {
     },
   ]);
 
+  const handleGetInfo = useCallback(async () => {
+    const consecutiveDays = (await doGetConsecutiveDays(student!.codstudent)).data;
+
+    setInfo([
+      {
+        number: consecutiveDays,
+        title: "Dias seguidos",
+        description: "Jogando, aprendendo e se divertindo dentro do FIOO.",
+        theme: "blue",
+      },
+      {
+        number: 13,
+        title: "Atividades",
+        description: "Já realizadas e aprendidas dentro do FIOO.",
+        theme: "green",
+      },
+    ])
+  }, [student, setInfo]);
+
+  useEffect(() => {
+    handleGetInfo();
+  }, []);
+
   return (
     <div className="profile-page">
       <ProfileIcon size="big" />
-      <Title text="{Criança}" size="28px" theme={colors.black} centered />
+      <Title text={student?.username!} size="28px" theme={colors.black} centered />
       <div className="child-info">
         {...info.map((el) => <ProfileInfoChip key={el.title} {...el} />)}
       </div>

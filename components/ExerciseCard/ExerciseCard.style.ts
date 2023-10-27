@@ -4,7 +4,7 @@ import { styled } from "@mui/system";
 export const StyledExerciseCard = styled("div")<{ color: string; secondary: string }>((props) => ({
     boxSizing: "border-box",
     margin: "0 auto",
-    width: "95%",
+    width: "100%",
     height: 130,
     display: "flex",
     justifyContent: "space-around",

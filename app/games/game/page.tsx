@@ -65,10 +65,10 @@ export default function Page() {
     }
   }, [game.currentQuestion]);
 
-  // if (game.currentGame. === null) {
-  //   router.push("/games/steps");
-  //   return null;
-  // }
+  if (game.currentGame.id === null) {
+    router.push("/games/steps");
+    return 0;
+  }
 
   return (
     <div className={styles.game_page_wrapper}>

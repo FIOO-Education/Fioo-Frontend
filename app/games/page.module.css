@@ -3,6 +3,10 @@
   padding-bottom: 20px;
 }
 
+.game_page > h3 {
+  margin-top: 4px;
+}
+
 .recent_played {
   width: auto;
   height: 175px;
@@ -16,7 +20,7 @@
 
 .suggestions {
   width: auto;
-  height: 330px;
+  height: auto;
   display: flex;
   gap: 14px;
   overflow-y: hidden;

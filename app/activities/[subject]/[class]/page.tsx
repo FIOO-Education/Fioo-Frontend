@@ -8,19 +8,32 @@ import VideoInfo from "@/components/VideoInfo/VideoInfo";
 import { colors } from "@/public/colors/colors";
 import { useChildStore } from "@/stores/use-child";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 const Page = () => {
     const router = useRouter();
-    const { currentClass } = useChildStore();
+    const { currentClass, setCurrentQuiz } = useChildStore();
+
+    const handleClick = useCallback(() => {
+        if(currentClass?.title && currentClass?.codClass && currentClass?.subject) {
+            setCurrentQuiz({
+                codActivity: 1,
+                title: currentClass.title,
+                codClass: currentClass.codClass,
+                subject: currentClass.subject, 
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdjzyY7-YcG_vt2C4tmNzNMrx8sticXXtEXAZF5gz5TQ&s"
+            });
+            router.push("/activities/quiz");
+        }
+    }, [currentClass, setCurrentQuiz]);
 
     useEffect(() => {
         if(!currentClass) {
-            router.push("/activities");
+            router.push(`/activities/${currentClass}`);
         }
     }, [currentClass]);
 
-    if(!currentClass?.subject) {
+    if(!currentClass) {
         return <></>;
     }
 
@@ -43,9 +56,7 @@ const Page = () => {
                 margin: "0 auto",
                 fontSize: 15
             }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <ConfirmButton text="Ir para exercícios" color={currentClass.subject === "Língua Portuguesa" ? "pink" : "blue"} onClick={() => {
-                console.log("cria");
-            }} />
+            <ConfirmButton text="Ir para exercícios" color={currentClass.subject === "Língua Portuguesa" ? "pink" : "blue"} onClick={handleClick} />
         </div>
      );
 }

@@ -8,6 +8,8 @@ export function getSubject(arg: string) {
             return "1";
         case "matemática" || "Matemática":
             return "2";
+        case "matematica":
+            return "Matemática";
         default:
             return arg;
     }
