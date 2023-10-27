@@ -11,19 +11,19 @@ const QuizPage = () => {
     const [ questions, setQuestions ] = useState<GameQuestion[]>([]);
     const { currentQuiz } = useChildStore();
 
-    if(!currentQuiz) {
-        router.push("/activities");
-        return 0;
-    }
-
     const handleGetQuestions = useCallback(async (codActivity: number) => {
         const data = await doGetQuestions(codActivity);
         setQuestions(data);
     }, [setQuestions]);
 
     useEffect(() => {
-        handleGetQuestions(currentQuiz.codActivity);
+        if(currentQuiz?.codActivity) handleGetQuestions(currentQuiz.codActivity);
     }, []);
+
+    if(!currentQuiz) {
+        router.push("/activities");
+        return 0;
+    }
 
     return (
         <div>
