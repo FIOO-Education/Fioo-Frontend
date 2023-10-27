@@ -1,20 +1,13 @@
 import { colors } from "@/public/colors/colors";
 import { useCallback, useEffect, useState } from "react";
 import { StyledGradeCard } from "./GradeCard.style";
+import { Curriculum } from "@/public/entities/entities";
+import { Capitalize } from "@/utils/capitalize";
 
-interface GradeCardProps {
-  subject: string;
-  section: string;
-  content: string;
-  grade: number;
-}
+export default function GradeCard(props: Curriculum) {
+    const { subject, title } = props.activity;
+    const { grade } = props;
 
-export default function GradeCard({
-  subject,
-  section,
-  content,
-  grade,
-}: GradeCardProps) {
     const [color, setColor] = useState({
         color: "",
         dark: ""
@@ -42,9 +35,9 @@ export default function GradeCard({
     <StyledGradeCard color={color.color} darkColor={color.dark} >
       <div>
         <section>
-          <p className="subject-title">{subject}</p>
+          <p className="subject-title">{}</p>
           <p>
-            <span className="subject-section">{section} |</span> {content}
+            <span className="subject-section">{title}</span>
           </p>
         </section>
         <p className="subject-grade">{grade === 10 ? grade : grade.toFixed(1)}</p>

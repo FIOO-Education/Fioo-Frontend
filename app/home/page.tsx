@@ -9,8 +9,10 @@ import GameCard from "@/components/GameCard/GameCard";
 import styles from "../games/page.module.css";
 import ProfileActivityCard from "@/components/ProfileActivityCard/ProfileActivityCard";
 import ExerciseCard from "@/components/ExerciseCard/ExerciseCard";
+import { useChildStore } from "@/stores/use-child";
 
 export default function Page() {
+  const { student } = useChildStore();
   const [recentPlayed, setRecentPlayed] = useState([
     {
       icon: WorldIcon.src,
@@ -49,7 +51,7 @@ export default function Page() {
   return (
     <div>
       <PageTitle
-        title="Olá, {Criança} 👋"
+        title={`Olá, ${student?.username} 👋`}
         text="Hoje é um ótimo dia para se divertir aprendendo!"
       />
       <h3>Continue seu exercício:</h3>
