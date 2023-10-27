@@ -1,4 +1,4 @@
-import { Answer, Class, FooterActions, Game, SelectedOption } from "@/public/entities/entities";
+import { Answer, Class, FooterActions, Game, SelectedOption, Activity, Student } from "@/public/entities/entities";
 import { create } from "zustand";
 import UserIcon from "@/public/images/profile-image.png";
 import Cachorro from "@/public/images/cachorro.png";
@@ -9,6 +9,9 @@ import Peixe from "@/public/images/peixe.jpg";
 
 
 interface ChildStore {
+    student: Student | null;
+    setStudent: (student: Student | null) => void;
+
     footerActions: FooterActions[];
     setFooterActions: (footerActions: FooterActions[]) => void;
 
@@ -25,9 +28,15 @@ interface ChildStore {
 
     currentClass: Class | null;
     setCurrentClass: (currentClass: Class) => void;
+
+    currentQuiz: Activity | null;
+    setCurrentQuiz: (quiz: Activity | null) => void;
 } 
 
 export const useChildStore = create<ChildStore>((set) => ({
+    student: null,
+    setStudent: (student) => set({ student }),
+
     footerActions: [],
     setFooterActions: (footerActions) => set(({ footerActions })),
 
@@ -163,5 +172,6 @@ export const useChildStore = create<ChildStore>((set) => ({
     currentClass: null,
     setCurrentClass: (currentClass) => set({ currentClass }),
 
-    
+    currentQuiz: null,
+    setCurrentQuiz: (currentQuiz) => set({ currentQuiz }),
 }))

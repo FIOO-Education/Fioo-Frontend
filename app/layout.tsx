@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer/Footer";
+import AuthProvider from "@/components/providers/AuthProvider";
 import { colors } from "@/public/colors/colors";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
@@ -26,14 +27,16 @@ export default function RootLayout({
         }}
         className={montserrat.className}
       >
-        <div
-          style={{
-            padding: "0 14px 80px 14px",
-          }}
-        >
-          {children}
-        </div>
-        <Footer />
+        <AuthProvider>
+          <div
+            style={{
+              padding: "0 14px 80px 14px",
+            }}
+          >
+            {children}
+          </div>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

@@ -8,8 +8,10 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import GameCard from "@/components/GameCard/GameCard";
 import ProfileActivityCard from "@/components/ProfileActivityCard/ProfileActivityCard";
+import { useChildStore } from "@/stores/use-child";
 
 export default function Page() {
+  const { student } = useChildStore();
   const [recentPlayed, setRecentPlayed] = useState([
     {
       icon: WorldIcon.src,
@@ -41,7 +43,7 @@ export default function Page() {
 
   return (
     <div className={styles.game_page}>
-      <PageTitle title="Eai, {Criança}" text="O que iremos jogar hoje?" />
+      <PageTitle title={`Eai, ${student?.username}`} text="O que iremos jogar hoje?" />
       <h3>Jogados recentemente</h3>
       <section className={styles.recent_played}>
         {recentPlayed.map((el, index) => (

@@ -2,14 +2,17 @@
 
 import GradeCard from "@/components/GradeCard/GradeCard";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./page.module.css";
 import SubjectsInfo from "@/components/SubjectInfo/SubjectInfo";
 import { colors } from "@/public/colors/colors";
 import PageTitle from "@/components/PageTitle/PageTitle";
+import { useChildStore } from "@/stores/use-child";
+import { doGetCurriculum } from "@/utils/req/do-get-curriculum";
+import { Curriculum } from "@/public/entities/entities";
 
-export default function Page() {
-  const router = useRouter();
+const Page = () => {
+  const { student } = useChildStore();
   const [subjectsInfo, setSubjectsInfo] = useState([
     {
       id: 1,
@@ -24,52 +27,32 @@ export default function Page() {
       color: colors.pink.pastel,
     },
   ]);
-  const [grades, setGrades] = useState([
-    {
-      subject: "Português",
-      section: "Gramática",
-      content: "Vogais",
-      grade: 7.8,
+  const [grades, setGrades] = useState<Curriculum[]>([]);
+
+  const handleGetCurriculum = useCallback(
+    async (codStudent: number) => {
+      const data = await doGetCurriculum(codStudent);
+      setGrades(data.data);
     },
-    {
-      subject: "Matemática",
-      section: "Multiplicação",
-      content: "Dois números",
-      grade: 9.5,
-    },
-    {
-      subject: "Matemática",
-      section: "Soma",
-      content: "O que são números?",
-      grade: 8,
-    },
-    {
-      subject: "Português",
-      section: "Multiplicação",
-      content: "Dois números",
-      grade: 10,
-    },
-    {
-      subject: "Matemática",
-      section: "Divisão",
-      content: "Fração",
-      grade: 6.5,
-    },
-    {
-      subject: "Português",
-      section: "Texto",
-      content: "Poesia",
-      grade: 8.2,
-    },
-  ]);
+    [student]
+  );
+
+  useEffect(() => {
+    if (student?.codstudent) {
+      handleGetCurriculum(student.codstudent);
+    }
+  }, [student]);
 
   return (
     <div>
-      <PageTitle title="E então, {Criança}" text="O que vamos estudar hoje?" />
+      <PageTitle
+        title={`E então, ${student?.username}`}
+        text="O que vamos estudar hoje?"
+      />
       <div className={styles.subjects}>
         {subjectsInfo.map((el) => (
           <SubjectsInfo key={el.name} {...el} />
-          ))}
+        ))}
       </div>
       <h3>Avaliações</h3>
       <div
@@ -88,4 +71,6 @@ export default function Page() {
       <h4 style={{ textAlign: "center" }}>Isso é tudo!</h4>
     </div>
   );
-}
+};
+
+export default Page;
