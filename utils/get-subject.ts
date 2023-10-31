@@ -10,6 +10,8 @@ export function getSubject(arg: string) {
             return "2";
         case "matematica":
             return "Matemática";
+        case "lingua portuguesa":
+            return "Língua portuguesa";
         default:
             return arg;
     }
