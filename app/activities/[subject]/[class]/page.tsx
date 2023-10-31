@@ -49,13 +49,13 @@ const Page = () => {
                 fixed
             />
             <VideoCard />
-            <h3>{currentClass.title} | {currentClass.nameClass}</h3>
+            <h3 style={{ textAlign: "left" }}><span style={{ color: currentClass.subject === "Língua Portuguesa" ? colors.pink.dark : colors.blue.dark }}>{currentClass.title} |</span> {currentClass.nameClass}</h3>
             <VideoInfo color={currentClass.subject === "Língua Portuguesa" ? "pink" : "blue"} duration="1h 20m" level="Matemática Nível I" />
             <p style={{
                 width: "85%",
                 margin: "0 auto",
                 fontSize: 15
-            }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            }}>{currentClass.description}</p>
             <ConfirmButton text="Ir para exercícios" color={currentClass.subject === "Língua Portuguesa" ? "pink" : "blue"} onClick={handleClick} />
         </div>
      );
