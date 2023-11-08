@@ -5,12 +5,13 @@ import { colors } from "@/public/colors/colors";
 interface ConfirmButtonProps {
     color: string;
     text: string;
+    full?: boolean;
     onClick: MouseEventHandler<HTMLDivElement>;
 }
 
-export default function ConfirmButton({ color, text, onClick }: ConfirmButtonProps) {
+export default function ConfirmButton({ color, text, full, onClick }: ConfirmButtonProps) {
     return (
-        <StyledConfirmButton onClick={onClick} color={color === "pink" ? colors.pink.pastel : colors.blue.pastel}>
+        <StyledConfirmButton onClick={onClick} full={full} color={color === "pink" ? colors.pink.pastel : colors.blue.pastel}>
             <p>{text}</p>
         </StyledConfirmButton>
     );

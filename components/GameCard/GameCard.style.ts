@@ -13,7 +13,7 @@ export const StyledGameCard = styled("div")<{ color: string; size: string }>(
     flexDirection: "column",
     justifyContent: "space-evenly",
     alignItems: "center",
-    padding: 20,
+    padding: 15,
     "& img": {
       fill: props.color,
       width: props.size === "small" ? "85px" : "150px",

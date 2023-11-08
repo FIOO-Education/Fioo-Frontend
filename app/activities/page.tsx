@@ -10,9 +10,11 @@ import PageTitle from "@/components/PageTitle/PageTitle";
 import { useChildStore } from "@/stores/use-child";
 import { doGetCurriculum } from "@/utils/req/do-get-curriculum";
 import { Curriculum } from "@/public/entities/entities";
+import LoadingGif from "@/components/LoadingGif/LoadingGif";
 
 const Page = () => {
   const { student } = useChildStore();
+  const [isLoading, setIsLoading] = useState(true);
   const [subjectsInfo, setSubjectsInfo] = useState([
     {
       id: 1,
@@ -33,8 +35,9 @@ const Page = () => {
     async (codStudent: number) => {
       const data = await doGetCurriculum(codStudent);
       setGrades(data.data);
+      setIsLoading(false);
     },
-    [student]
+    [student, setIsLoading]
   );
 
   useEffect(() => {
@@ -55,20 +58,28 @@ const Page = () => {
         ))}
       </div>
       <h3>Avaliações</h3>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        {grades.map((el, index) => (
-          <GradeCard {...el} key={index} />
-        ))}
-      </div>
-      <h4 style={{ textAlign: "center" }}>Isso é tudo!</h4>
+      <span>
+        {isLoading ? (
+          <LoadingGif />
+        ) : (
+          <>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              {grades && grades.map((el, index) => (
+                <GradeCard {...el} key={index} />
+              ))}
+            </div>
+            <h4 style={{ textAlign: "center" }}>Isso é tudo!</h4>
+          </>
+        )}
+      </span>
     </div>
   );
 };

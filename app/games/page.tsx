@@ -47,13 +47,13 @@ export default function Page() {
       <h3>Jogados recentemente</h3>
       <section className={styles.recent_played}>
         {recentPlayed.map((el, index) => (
-          <GameCard key={index} {...el} size="small" />
+          <GameCard key={index} {...el} index={index} size="small" />
         ))}
       </section>
       <h3>Que tal esses?</h3>
       <section className={styles.suggestions}>
         {suggestions.map((el, index) => (
-          <GameCard key={index} {...el} size="big" />
+          <GameCard key={index} {...el} index={index} size="big" />
         ))}
       </section>
       <ProfileActivityCard

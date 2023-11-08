@@ -2,7 +2,7 @@ import { styled } from "@mui/system";
 
 export const StyledProfileActivityCard = styled("div")<{ color: string }>((props) => ({
     position: "relative",
-    width: "92.5%",
+    width: "95.5%",
     height: "100px",
     borderRadius: "24px",
     padding: "8px 12px",
