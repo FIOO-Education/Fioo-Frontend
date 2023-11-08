@@ -1,17 +1,22 @@
-import { useCallback, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StyledVideoCard } from "./VideoCard.style";
-import PlayIcon from "@/public/images/play-icon.svg";
 
-export default function VideoCard() {
-    const [ isPlaying, setIsPlaying ] = useState(false);
+export default function VideoCard({ video, setDuration }: {
+    video: string;
+    setDuration: Function;
+}) {
+    const ref = useRef<HTMLVideoElement>(null);
 
-    const handleClick = useCallback(() => {
-        setIsPlaying(!isPlaying);
-    }, [isPlaying, setIsPlaying]);
+    useEffect(() => {
+        if(ref.current) {
+            setDuration(ref.current.currentTime);
+        }
+    }, [ref.current]);
 
     return (
-        <StyledVideoCard onClick={handleClick}>
-            {!isPlaying && <img src={PlayIcon.src} width={70} height={70} alt="" />}
+        <StyledVideoCard ref={ref} controls>
+            <source src="https://www.youtube.com/watch?v=cSNaDEM3z7s&list=RDCLAK5uy_lJLWbvlgOPedbqoQeFUoxLTrzbBSb1qQA" type="video/mp4" />
+            Your browser does not support the video tag.
         </StyledVideoCard>
     );
 };

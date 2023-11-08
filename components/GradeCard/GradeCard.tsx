@@ -2,7 +2,7 @@ import { colors } from "@/public/colors/colors";
 import { useCallback, useEffect, useState } from "react";
 import { StyledGradeCard } from "./GradeCard.style";
 import { Curriculum } from "@/public/entities/entities";
-import { Capitalize } from "@/utils/capitalize";
+import { getSubject } from "@/utils/get-subject";
 
 export default function GradeCard(props: Curriculum) {
     const { subject, title } = props.activity;
@@ -35,7 +35,7 @@ export default function GradeCard(props: Curriculum) {
     <StyledGradeCard color={color.color} darkColor={color.dark} >
       <div>
         <section>
-          <p className="subject-title">{}</p>
+          <p className="subject-title">{getSubject(subject)}</p>
           <p>
             <span className="subject-section">{title}</span>
           </p>

@@ -4,35 +4,6 @@ export interface FooterActions {
     active: boolean;
 }
 
-export interface GameOption {
-    option: string;
-    isCorrect: boolean;
-}
-
-export interface GameQuestion {
-    question: string;
-    imgSrc: string;
-    options: GameOption[];
-}
-
-export interface Game {
-    currentGame: {
-        id: number | null;
-        questions: GameQuestion[];
-    };
-    currentQuestion: number;
-    maxQuestionReached: number;
-}
-
-export interface SelectedOption {
-    selected: number | null;
-    correctOption: boolean;
-}
-
-export interface Answer {
-    questionId: number;
-}
-
 export interface Class {
     codClass: number;
     nameClass: string;
@@ -46,9 +17,9 @@ export interface Class {
 export interface Activity {
     codActivity: number;
     title: string;
-    image: string;
     subject: string,
-    codClass: number;
+    codClass: number | null;
+    questions: Question[];
 }
 
 export interface Student {
@@ -66,4 +37,24 @@ export interface Curriculum {
     codStudent: number;
     grade: number;
     realizationDate: Date;
+}
+
+export interface Question {
+    codQuestion: number;
+    question: string;
+    image: string;
+    codActivity: number;
+    alternatives: Alternative[];
+}
+
+export interface Alternative {
+    codAlternative: number;
+    alternative: string;
+    correct: boolean;
+    codQuestion: number;
+}
+
+export interface Result {
+    rightAnswer: number;
+    totalQuestion: number;
 }

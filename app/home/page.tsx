@@ -1,9 +1,6 @@
 "use client";
 
 import PageTitle from "@/components/PageTitle/PageTitle";
-import WorldIcon from "@/public/images/world.svg";
-import BeeIcon from "@/public/images/bee.svg";
-import StarIcon from "@/public/images/star.svg";
 import { useState } from "react";
 import GameCard from "@/components/GameCard/GameCard";
 import styles from "../games/page.module.css";
@@ -15,15 +12,12 @@ export default function Page() {
   const { student } = useChildStore();
   const [recentPlayed, setRecentPlayed] = useState([
     {
-      icon: WorldIcon.src,
       title: "Caça-palavras",
     },
     {
-      icon: BeeIcon.src,
       title: "Caça-palavras",
     },
     {
-      icon: StarIcon.src,
       title: "Caça-palavras",
     },
   ]);
@@ -59,7 +53,7 @@ export default function Page() {
       <h3>Jogados recentemente</h3>
       <section className={styles.recent_played}>
         {recentPlayed.map((el, index) => (
-          <GameCard key={index} {...el} size="small" />
+          <GameCard key={index} {...el} index={index} size="small" />
         ))}
       </section>
       <div

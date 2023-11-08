@@ -11,6 +11,7 @@ import ProfileActivityCard from "@/components/ProfileActivityCard/ProfileActivit
 import { useRouter, usePathname } from "next/navigation";
 import { useChildStore } from "@/stores/use-child";
 import { doGetConsecutiveDays } from "@/utils/req/do-get-consecutive-days";
+import LoadingGif from "@/components/LoadingGif/LoadingGif";
 
 export default function Page() {
   const router = useRouter();
@@ -22,20 +23,7 @@ export default function Page() {
     description: string;
     theme: string;
   }[]>([]);
-  const [activity, setActivity] = useState([
-    {
-      title: "Tarefas",
-      description: "Que tal algumas atividades?",
-      theme: "green",
-      redirect: "/activities"
-    },
-    {
-      title: "Jogos",
-      description: "Que tal alguns jogos divertidos?",
-      theme: "pink",
-      redirect: "/games"
-    },
-  ]);
+  const [activity, setActivity] = useState<any[]>([]);
 
   const handleGetInfo = useCallback(async () => {
     const consecutiveDays = (await doGetConsecutiveDays(student!.codstudent)).data;
@@ -58,7 +46,25 @@ export default function Page() {
 
   useEffect(() => {
     handleGetInfo();
+    setActivity([
+      {
+        title: "Tarefas",
+        description: "Que tal algumas atividades?",
+        theme: "green",
+        redirect: "/activities"
+      },
+      {
+        title: "Jogos",
+        description: "Que tal alguns jogos divertidos?",
+        theme: "pink",
+        redirect: "/games"
+      },
+    ]);
   }, []);
+
+  if(!activity.length || !info.length) {
+    return <LoadingGif center />;
+  }
 
   return (
     <div className="profile-page">

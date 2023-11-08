@@ -18,10 +18,6 @@ const ClassHeader = ({ subject }: ClassHeaderProps) => {
                 fixed
                 color={subject === "Língua Portuguesa" ? "pink" : "blue"}
             />
-            <StarButton
-                color={subject === "Língua Portuguesa" ? "pink" : "blue"}
-                fixed
-            />
             <p>{subject}</p>
         </StyledClassHeader>
      );

@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { StyledSubjectsInfo } from "./SubjectInfo.style";
 import { useRouter } from "next/navigation";
+import { useChildStore } from "@/stores/use-child";
 
 interface SubjectsInfoProps {
     id: number;
@@ -11,9 +12,11 @@ interface SubjectsInfoProps {
 
 export default function SubjectsInfo({ id, name, description, color }: SubjectsInfoProps) {
     const router = useRouter();
+    const { setSubject } = useChildStore();
 
     const handleClick = useCallback(() => {
-        router.push(`/activities/${id}`);
+        setSubject(id.toString());
+        router.push(`/activities/subject`);
     }, [id]);
 
     return (

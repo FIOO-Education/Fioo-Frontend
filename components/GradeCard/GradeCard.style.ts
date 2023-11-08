@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 
 export const StyledGradeCard = styled("div")<{ color: string, darkColor: string }>((props) => ({
     position: "relative",
-    width: "85%",
+    width: "95%",
     height: "75px",
     borderRadius: "16px",
     padding: "8px 12px",

@@ -6,15 +6,15 @@ import { useChildStore } from "@/stores/use-child";
 import { getSubject } from "@/utils/get-subject";
 import { useRouter } from "next/navigation";
 
-export default function Page() {
+const QuizResultPage = () => {
     const router = useRouter();
-    const { currentQuiz } = useChildStore();
+    const { result, currentQuiz } = useChildStore();
 
-    if(!currentQuiz) {
-        router.push("/games/steps");
+    if(!result) {
+        router.push("/activities");
         return null;
     }
-
+    
     return (
         <div>
             <BackButton fixed onClick={() => {
@@ -24,3 +24,5 @@ export default function Page() {
         </div>
     );
 }
+ 
+export default QuizResultPage;

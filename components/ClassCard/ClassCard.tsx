@@ -16,7 +16,7 @@ const ClassCard = (props: Class) => {
     const handleClick = useCallback(() => {
         if(viewed) {
             setCurrentClass(props);
-            router.push(pathname + `/${props.codClass}`);
+            router.push("/activities/class");
         }
     }, [viewed, props]);
 
