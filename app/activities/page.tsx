@@ -26,7 +26,7 @@ const Page = () => {
       id: 2,
       name: "Matemática Básica",
       description: "Vamos aprender as contas básicas de essenciais!",
-      color: colors.pink.pastel,
+      color: colors.pink.radiant,
     },
   ]);
   const [grades, setGrades] = useState<Curriculum[]>([]);

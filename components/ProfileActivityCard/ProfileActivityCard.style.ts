@@ -1,9 +1,10 @@
 import { styled } from "@mui/system";
 
 export const StyledProfileActivityCard = styled("div")<{ color: string }>((props) => ({
+    boxSizing: "border-box",
     position: "relative",
-    width: "95.5%",
-    height: "100px",
+    width: "100%",
+    height: "110px",
     borderRadius: "24px",
     padding: "8px 12px",
     backgroundColor: props.color,

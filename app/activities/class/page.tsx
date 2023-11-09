@@ -14,7 +14,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const Page = () => {
   const router = useRouter();
-  const [ duration, setDuration ] = useState<string>("");
   const [ activity, setActivity ] = useState<Activity | null>(null);
   const [ isFavorite, setFavorite ] = useState(false);
   const { currentClass, setCurrentQuiz } = useChildStore();
@@ -61,7 +60,7 @@ const Page = () => {
   return (
     <div style={{ color: colors.black }}>
       <BackButton
-        onClick={() => router.push("/activities")}
+        onClick={() => router.push("/activities/subject")}
         fixed
         color={currentClass.subject === "Língua Portuguesa" ? "pink" : "blue"}
       />
@@ -71,7 +70,7 @@ const Page = () => {
         isFavorited={isFavorite}
         el={currentClass.nameClass}
       />
-      <VideoCard setDuration={setDuration} video={currentClass.videoLink} />
+      <VideoCard />
       <h3 style={{ textAlign: "left" }}>
         <span
           style={{
@@ -87,7 +86,7 @@ const Page = () => {
       </h3>
       <VideoInfo
         color={currentClass.subject === "Língua Portuguesa" ? "pink" : "blue"}
-        duration={duration}
+        duration={""}
         level="Matemática Nível I"
       />
       <p

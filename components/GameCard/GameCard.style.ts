@@ -20,7 +20,7 @@ export const StyledGameCard = styled("div")<{ color: string; size: string }>(
       height: props.size === "small" ? "85px" : "150px",
     },
     "& > p": {
-      fontSize: props.size === "small" ? "16px" : "24px",
+      fontSize: props.size === "small" ? "14px" : "20px",
       fontWeight: "700",
       color: colors.black,
     },

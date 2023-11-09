@@ -1,7 +1,7 @@
 import { styled } from "@mui/system";
 
 export const StyledProfileInfoChip = styled("div")<{ color: string }>((props) => ({
-    width: "165px",
+    width: "47%",
     height: "190px",
     display: "flex",
     flexDirection: "column",

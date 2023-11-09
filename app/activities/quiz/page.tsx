@@ -11,10 +11,12 @@ import { colors } from "@/public/colors/colors";
 import ConfirmButton from "@/components/ConfirmButton/ConfirmButton";
 import Mascote from "@/public/images/mascote.svg";
 import LoadingGif from "@/components/LoadingGif/LoadingGif";
+import { doPostAction } from "@/utils/req/do-post-action";
+import { doPostCurriculum } from "@/utils/req/do-post-curriculum";
 
 const QuizPage = () => {
   const router = useRouter();
-  const { currentQuiz, setResult } = useChildStore();
+  const { student, currentQuiz, setResult } = useChildStore();
   const [answers, setAnswers] = useState<Alternative[]>([]);
   const [selected, setSelected] = useState<Alternative | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -27,14 +29,14 @@ const QuizPage = () => {
     router.push("/activities");
     return null;
   }
-  
+
   if(answers.length === currentQuiz?.questions.length) {
     return <LoadingGif center />
   }
 
   return (
     <div>
-      <BackButton fixed onClick={() => router.push("activities")} color={currentQuiz.subject === "Matemática" ? "blue" : "pink"} />
+      <BackButton fixed onClick={() => router.push("/activities/class")} color={currentQuiz.subject === "Matemática" ? "blue" : "pink"} />
       <h2 className={styles.quiz_title}>
         <span style={{ color: currentQuiz.subject === "Matemática" ? colors.blue.dark : colors.pink.dark }}>{currentQuiz.subject} |</span> {currentQuiz?.title}
       </h2>
@@ -58,7 +60,7 @@ const QuizPage = () => {
       <ConfirmButton
         text="Confirmar alternativa"
         color={currentQuiz.subject === "Matemática" ? "blue" : "pink"}
-        onClick={() => {
+        onClick={async () => {
           if (!selected) return 0;
 
           const newAnswers = [...answers, selected];
@@ -67,10 +69,25 @@ const QuizPage = () => {
           if (currentQuestion < currentQuiz.questions.length - 1) {
             setCurrentQuestion(currentQuestion + 1);
             setSelected(null);
-          } else {
+          } else if(student?.codstudent) {
+            const totalQuestion = newAnswers.length;
+            const rightAnswer = newAnswers.filter((el) => el.correct).length;
+            const rDate = new Date();
             setResult({
-              totalQuestion: newAnswers.length,
-              rightAnswer: newAnswers.filter((el) => el.correct).length,
+              totalQuestion,
+              rightAnswer,
+            });
+            await doPostAction({
+              actionDate: rDate,
+              codActivity: currentQuiz.codActivity,
+              codClass: currentQuiz.codClass,
+              codStudent: student.codstudent,
+            });
+            await doPostCurriculum({
+              codStudent: student.codstudent,
+              codActivity: currentQuiz.codActivity,
+              grade: totalQuestion / rightAnswer,
+              realizationDate: rDate,
             });
             router.push("/activities/quiz/result");
           }

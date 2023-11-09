@@ -32,8 +32,8 @@ export interface Student {
 }
 
 export interface Curriculum {
-    codGrade: number;
-    activity: Activity;
+    codGrade?: number;
+    codActivity: number;
     codStudent: number;
     grade: number;
     realizationDate: Date;
@@ -57,4 +57,12 @@ export interface Alternative {
 export interface Result {
     rightAnswer: number;
     totalQuestion: number;
+}
+
+export interface Action {
+    id?: number;
+    actionDate: Date;
+    codStudent: number;
+    codClass: number | null;
+    codActivity: number;
 }

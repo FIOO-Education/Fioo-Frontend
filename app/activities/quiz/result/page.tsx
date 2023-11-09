@@ -17,9 +17,7 @@ const QuizResultPage = () => {
     
     return (
         <div>
-            <BackButton fixed onClick={() => {
-                currentQuiz && router.push(`/activities/${getSubject(currentQuiz?.subject)}/${currentQuiz?.codClass}`);
-            }} color={currentQuiz!.subject === "Matemática" ? "blue" : "pink"} />
+            <BackButton fixed onClick={() => router.push("/activities/class")} color={currentQuiz!.subject === "Matemática" ? "blue" : "pink"} />
             <ResultDisplay />
         </div>
     );

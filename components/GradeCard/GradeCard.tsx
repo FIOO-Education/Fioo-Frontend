@@ -3,15 +3,24 @@ import { useCallback, useEffect, useState } from "react";
 import { StyledGradeCard } from "./GradeCard.style";
 import { Curriculum } from "@/public/entities/entities";
 import { getSubject } from "@/utils/get-subject";
+import { doGetActivity } from "@/utils/req/do-get-activity";
+import { doGetActivityId } from "@/utils/req/do-get-activity-id";
 
 export default function GradeCard(props: Curriculum) {
-    const { subject, title } = props.activity;
+  const [ subject, setSubject ] = useState("");
+  const [ title, setTitle ] = useState("");
     const { grade } = props;
 
     const [color, setColor] = useState({
         color: "",
         dark: ""
     });
+
+    const handleGetActivity = useCallback(async () => {
+      const { data } = await doGetActivityId(props.codActivity);
+      setSubject(data.subject);
+      setTitle(data.title);
+    }, []);
 
   const getRandomColor = useCallback(() => {
     const random = Math.random();
@@ -34,12 +43,12 @@ export default function GradeCard(props: Curriculum) {
   return (
     <StyledGradeCard color={color.color} darkColor={color.dark} >
       <div>
-        <section>
+        {/* <section>
           <p className="subject-title">{getSubject(subject)}</p>
           <p>
             <span className="subject-section">{title}</span>
           </p>
-        </section>
+        </section> */}
         <p className="subject-grade">{grade === 10 ? grade : grade.toFixed(1)}</p>
       </div>
     </StyledGradeCard>

@@ -19,13 +19,8 @@ export const StyledResultDisplay = styled("div")<{ textColor: string; }>((props)
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
-        "& > svg": {
-            position: "relative",
-            "& > g": {
-                position: "absolute",
-                top: "50%", left: "50%",
-                transform: "translate(-20%, 0)"
-            }
+        "& > h3": {
+            color: props.textColor
         },
         "& text": {
             fill: props.textColor,
@@ -40,5 +35,6 @@ export const StyledResultDisplay = styled("div")<{ textColor: string; }>((props)
         display: "flex",
         flexDirection: "column",
         gap: 12,
+        marginBottom: 20,
     }
 }));

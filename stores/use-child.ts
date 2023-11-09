@@ -1,6 +1,5 @@
 import { Class, FooterActions, Activity, Student, Result } from "@/public/entities/entities";
 import { create } from "zustand";
-import UserIcon from "@/public/images/profile-image.png";
 
 interface ChildStore {
     student: Student | null;
@@ -8,9 +7,6 @@ interface ChildStore {
 
     footerActions: FooterActions[];
     setFooterActions: (footerActions: FooterActions[]) => void;
-
-    userIcon: string;
-    setUserIcon: (userIcon: string) => void;
 
     subject: string | null;
     setSubject: (subject: string) => void;
@@ -31,9 +27,6 @@ export const useChildStore = create<ChildStore>((set) => ({
 
     footerActions: [],
     setFooterActions: (footerActions) => set(({ footerActions })),
-
-    userIcon: UserIcon.src,
-    setUserIcon: (userIcon) => set({ userIcon }),
 
     subject: null,
     setSubject: (subject) => set({ subject }),

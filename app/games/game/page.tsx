@@ -9,24 +9,41 @@ import GameResponse from "@/components/GameResponse/GameResponse";
 import { colors } from "@/public/colors/colors";
 import { Alternative } from "@/public/entities/entities";
 import LoadingGif from "@/components/LoadingGif/LoadingGif";
+import { doPostAction } from "@/utils/req/do-post-action";
+import { doPostCurriculum } from "@/utils/req/do-post-curriculum";
 
 export default function Page() {
-  const { currentQuiz, setResult } = useChildStore();
+  const { currentQuiz, setResult, student } = useChildStore();
   const [ currentQuestion, setQuestion ] = useState<number>(0);
   const [ answers, setAnswers ] = useState<Alternative[]>([]);
   const router = useRouter();
 
-  const goToNextQuestion = useCallback(() => {
+  const goToNextQuestion = useCallback(async () => {
     if(currentQuiz?.questions && currentQuestion < currentQuiz?.questions.length - 1) {
       setQuestion(currentQuestion + 1);
-    } else {
+    } else if(currentQuiz?.codActivity && student?.codstudent) {
+      const totalQuestion = answers.length;
+      const rightAnswer = answers .filter((el) => el.correct).length;
+      const rDate = new Date();
       setResult({
         rightAnswer: answers.filter((el) => el.correct).length,
         totalQuestion: answers.length,
       });
+      await doPostAction({
+        actionDate: rDate,
+        codActivity: currentQuiz.codActivity,
+        codClass: null,
+        codStudent: student.codstudent,
+      });
+      await doPostCurriculum({
+        codStudent: student.codstudent,
+        codActivity: currentQuiz.codActivity,
+        grade: totalQuestion / rightAnswer,
+        realizationDate: rDate,
+      });
       router.push("/games/result");
     }
-  }, [currentQuiz, answers, currentQuestion, setQuestion]);
+  }, [student, currentQuiz, answers, currentQuestion, setQuestion]);
 
   const addAnswer = useCallback((answer: Alternative) => {
     setAnswers([...answers, answer]);

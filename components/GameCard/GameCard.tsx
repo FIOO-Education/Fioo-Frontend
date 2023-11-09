@@ -9,7 +9,7 @@ import ControleIcon from "@/public/images/controle.svg";
 
 interface Props {
     index: number;
-    title: string;
+    title?: string;
     size: string;
 }
 
@@ -48,13 +48,14 @@ export default function GameCard({ index, title, size }: Props) {
         }
     }, []);
 
+
     const icon = getRandomIcon(index);
     const color = getRandomColor(icon);
 
     return (
         <StyledGameCard color={color} size={size} onClick={() => router.push("/games/steps")}>
             <img src={memoizedIcons[icon]} alt={title + "Icon"} />
-            <p>{title}</p>
+            {title && <p>{title}</p>}
         </StyledGameCard>
     );
 }
