@@ -1,7 +1,8 @@
 import { styled } from "@mui/system";
 
-export const StyledConfirmButton = styled("div")<{ color: string; }>((props) => ({
-    width: "190px",
+export const StyledConfirmButton = styled("div")<{ color: string; full: boolean | undefined; }>((props) => ({
+    boxSizing: "border-box",
+    width: props.full ? "100%" : "220px",
     height: "60px",
     margin: "16px auto",
     padding: "0 20px",

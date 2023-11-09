@@ -8,12 +8,12 @@ interface GameStepProps {
 }
 
 export default function GameStep({ index, onClick }: GameStepProps) {
-  const game = useChildStore((s) => s.game);
+  // const game = useChildStore((s) => s.game);
   const [answered, setAnswered] = useState<boolean | null>(null);
 
-  useEffect(() => {
-    setAnswered(index <= game.maxQuestionReached);
-  }, [game]);
+  // useEffect(() => {
+  //   setAnswered(index <= game.maxQuestionReached);
+  // }, [game]);
 
   if (answered === null) {
     return null;

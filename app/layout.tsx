@@ -24,6 +24,7 @@ export default function RootLayout({
           padding: 0,
           boxSizing: "border-box",
           backgroundColor: colors.white,
+          color: colors.black
         }}
         className={montserrat.className}
       >

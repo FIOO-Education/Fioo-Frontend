@@ -1,77 +1,69 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
-import styles from "./page.module.css";
+import { useCallback, useEffect, useState } from "react";
 import BackButton from "@/components/BackButton/BackButton";
 import { useRouter } from "next/navigation";
 import { useChildStore } from "@/stores/use-child";
 import GameStep from "@/components/GameStep/GameStep";
 import GameResponse from "@/components/GameResponse/GameResponse";
 import { colors } from "@/public/colors/colors";
+import { Alternative } from "@/public/entities/entities";
+import LoadingGif from "@/components/LoadingGif/LoadingGif";
+import { doPostAction } from "@/utils/req/do-post-action";
+import { doPostCurriculum } from "@/utils/req/do-post-curriculum";
 
 export default function Page() {
+  const { currentQuiz, setResult, student } = useChildStore();
+  const [ currentQuestion, setQuestion ] = useState<number>(0);
+  const [ answers, setAnswers ] = useState<Alternative[]>([]);
   const router = useRouter();
-  const game = useChildStore((s) => s.game);
-  const setGame = useChildStore((s) => s.setGame);
-  const optionSelected = useChildStore((s) => s.optionSelected);
-  const setOptionSelected = useChildStore((s) => s.setOptionSelected);
-  const answers = useChildStore((s) => s.answers);
-  const setAnswers = useChildStore((s) => s.setAnswers);
 
-  const handleStepClick = useCallback(
-    (index: number) => {
-      if (index <= game.maxQuestionReached) {
-        let tempGame = { ...game };
-        tempGame.currentQuestion = index;
-        setGame(tempGame);
-      }
-    },
-    [game, setGame]
-  );
-
-  const goToNextQuestion = useCallback(() => {
-    const alreadyExists = answers.find(
-      (el) => el.questionId === game.currentQuestion
-    );
-
-    if (optionSelected.correctOption && alreadyExists === undefined) {
-      setAnswers([...answers, { questionId: game.currentQuestion }]);
-    } else if (!optionSelected.correctOption && alreadyExists !== undefined) {
-      let tempAnswers = [...answers].filter(
-        (el) => el.questionId !== game.currentQuestion
-      );
-      setAnswers(tempAnswers);
-    }
-
-    if (optionSelected.selected === null) {
-      return;
-    } else if (game.currentQuestion === 5) {
+  const goToNextQuestion = useCallback(async () => {
+    if(currentQuiz?.questions && currentQuestion < currentQuiz?.questions.length - 1) {
+      setQuestion(currentQuestion + 1);
+    } else if(currentQuiz?.codActivity && student?.codstudent) {
+      const totalQuestion = answers.length;
+      const rightAnswer = answers .filter((el) => el.correct).length;
+      const rDate = new Date();
+      setResult({
+        rightAnswer: answers.filter((el) => el.correct).length,
+        totalQuestion: answers.length,
+      });
+      await doPostAction({
+        actionDate: rDate,
+        codActivity: currentQuiz.codActivity,
+        codClass: null,
+        codStudent: student.codstudent,
+      });
+      await doPostCurriculum({
+        codStudent: student.codstudent,
+        codActivity: currentQuiz.codActivity,
+        grade: totalQuestion / rightAnswer,
+        realizationDate: rDate,
+      });
       router.push("/games/result");
-    } else if (game.currentQuestion < 5) {
-      let tempGame = { ...game };
-      tempGame.currentQuestion++;
-      setGame(tempGame);
-      let tempOptionSelected = { ...optionSelected };
-      tempOptionSelected.selected = null;
-      setOptionSelected(tempOptionSelected);
     }
-  }, [game, setGame, optionSelected, answers, setAnswers]);
+  }, [student, currentQuiz, answers, currentQuestion, setQuestion]);
 
+  const addAnswer = useCallback((answer: Alternative) => {
+    setAnswers([...answers, answer]);
+  }, [answers, goToNextQuestion]);
+  
   useEffect(() => {
-    if (game.currentQuestion > game.maxQuestionReached) {
-      let tempGame = { ...game };
-      tempGame.maxQuestionReached = game.currentQuestion;
-      setGame(tempGame);
-    }
-  }, [game.currentQuestion]);
+    answers.length && goToNextQuestion();
+  }, [answers]);
 
-  if (game.currentGame.id === null) {
+  if(!currentQuiz) {
     router.push("/games/steps");
-    return 0;
+    return null;
+  }
+
+  if(answers.length === currentQuiz?.questions.length) {
+    return <LoadingGif center />;
   }
 
   return (
-    <div className={styles.game_page_wrapper}>
+    <div>
       <BackButton color="blue" onClick={() => router.push("/games/steps")} fixed />
       <p
         style={{
@@ -83,25 +75,15 @@ export default function Page() {
       >
         <span
           style={{
-            color: colors.pink.dark,
+            color: colors.blue.dark,
             fontWeight: "700",
           }}
         >
-          Nível {game.currentGame.id} |
+          Nível 1 |
         </span>{" "}
         Complete a palavra
       </p>
-      <section className={styles.game_step}>
-        <hr />
-        {game.currentGame.questions.map((el, index) => (
-          <GameStep
-            onClick={handleStepClick}
-            key={el.question}
-            index={index + 1}
-          />
-        ))}
-      </section>
-      <GameResponse onClick={goToNextQuestion} />
+      <GameResponse currentQuestion={currentQuestion} addAnswer={addAnswer} />
     </div>
   );
 }

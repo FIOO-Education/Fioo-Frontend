@@ -6,23 +6,26 @@ import RightArrow from "@/public/images/icon-changer-right.svg";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import ProfileIcon from "@/components/ProfileIcon/ProfileIcon";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import DefaultIcon from "@/public/images/profile-image.png";
 import ManIcon from "@/public/images/man-icon.png";
 import GirlIcon from "@/public/images/girl-icon.png";
 import { useChildStore } from "@/stores/use-child";
 import BackButton from "@/components/BackButton/BackButton";
+import { Student } from "@/public/entities/entities";
+import { doPatchStudent } from "@/utils/req/do-patch-student";
+
+const icons = [
+  "https://h-leone.github.io/images/public/images/fiooFundoRoxo.png",
+  "https://h-leone.github.io/images/public/images/fiooFundoAzul.png",
+  "https://h-leone.github.io/images/public/images/fiooFundoAmarelo.png",
+]
 
 export default function Page() {
+  const memoizedIcons = useMemo(() => icons, []);
   const router = useRouter();
-  const [icons, setIcons] = useState([
-    DefaultIcon.src,
-    ManIcon.src,
-    GirlIcon.src,
-  ]);
-  const userIcon = useChildStore((s) => s.userIcon);
-  const setUserIcon = useChildStore((s) => s.setUserIcon);
-  const [currentIndex, setCurrentIndex] = useState(icons.indexOf(userIcon));
+  const { student, setStudent } = useChildStore();
+  const [currentIndex, setCurrentIndex] = useState(memoizedIcons.indexOf(student!.image));
 
   const handleChangeIcon = useCallback(
     (increment: number) => {
@@ -38,9 +41,14 @@ export default function Page() {
     [currentIndex, setCurrentIndex, icons]
   );
 
-  const handleSetIcon = useCallback(() => {
-    setUserIcon(icons[currentIndex]);
-  }, [currentIndex, icons, setUserIcon]);
+  const handleSetIcon = useCallback(async () => {
+    const newStudent = {
+      ...student,
+      image: memoizedIcons[currentIndex]
+    } as Student;
+    setStudent({ ...newStudent });
+    await doPatchStudent(newStudent);
+  }, [currentIndex, icons, student, setStudent]);
 
   return (
     <div>

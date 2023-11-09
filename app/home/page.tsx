@@ -1,32 +1,20 @@
 "use client";
 
 import PageTitle from "@/components/PageTitle/PageTitle";
-import WorldIcon from "@/public/images/world.svg";
-import BeeIcon from "@/public/images/bee.svg";
-import StarIcon from "@/public/images/star.svg";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import GameCard from "@/components/GameCard/GameCard";
 import styles from "../games/page.module.css";
 import ProfileActivityCard from "@/components/ProfileActivityCard/ProfileActivityCard";
 import ExerciseCard from "@/components/ExerciseCard/ExerciseCard";
 import { useChildStore } from "@/stores/use-child";
+import { doGetRecentPlayed } from "@/utils/req/do-get-recent-played";
+import { Action, Class } from "@/public/entities/entities";
+import LoadingGif from "@/components/LoadingGif/LoadingGif";
+import { doGetClasses } from "@/utils/req/do-get-classes";
 
 export default function Page() {
   const { student } = useChildStore();
-  const [recentPlayed, setRecentPlayed] = useState([
-    {
-      icon: WorldIcon.src,
-      title: "Caça-palavras",
-    },
-    {
-      icon: BeeIcon.src,
-      title: "Caça-palavras",
-    },
-    {
-      icon: StarIcon.src,
-      title: "Caça-palavras",
-    },
-  ]);
+  const [recentPlayed, setRecentPlayed] = useState<Action[]>([]);
   const [activity, setActivity] = useState([
     {
       title: "Tarefas",
@@ -41,12 +29,28 @@ export default function Page() {
       redirect: "/games",
     },
   ]);
-  const [continuePlaying, setContinuePlaying] = useState({
-    codClass: 1,
-    subject: "Matemática",
-    title: "Soma",
-    nameClass: "O que são números"
-  });
+  const [continuePlaying, setContinuePlaying] = useState<Class | null>(null);
+
+  const handleGetRecentPlayed = useCallback(async () => {
+    const { data } = await doGetRecentPlayed(student!.codstudent);
+    setRecentPlayed(data);
+  }, [student]);
+
+  const handleGetContinuePlaying = useCallback(async () => {
+    const { data } = await doGetClasses("Matemática");
+    if(data.length) {
+      setContinuePlaying(data[0]);
+    }
+  }, []);
+
+  useEffect(() => {
+    handleGetRecentPlayed();
+    handleGetContinuePlaying();
+  }, []);
+
+  if(!recentPlayed.length || !continuePlaying) {
+    return <LoadingGif center />
+  }
 
   return (
     <div>
@@ -58,8 +62,8 @@ export default function Page() {
       <ExerciseCard {...continuePlaying} />
       <h3>Jogados recentemente</h3>
       <section className={styles.recent_played}>
-        {recentPlayed.map((el, index) => (
-          <GameCard key={index} {...el} size="small" />
+        {recentPlayed.slice(0, 3).map((el, index) => (
+          <GameCard key={index} {...el} index={index} size="small" />
         ))}
       </section>
       <div

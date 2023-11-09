@@ -7,27 +7,16 @@ import { getSubject } from "@/utils/get-subject";
 import { useChildStore } from "@/stores/use-child";
 import { Class } from "@/public/entities/entities";
 
-interface Props {
-  codClass: number;
-  subject: string;
-  title: string;
-  nameClass: string;
-}
-
-export default function ExerciseCard({ codClass, subject, title, nameClass }: Props) {
+export default function ExerciseCard(props: Class) {
+    const { codClass, subject, title, nameClass } = props;
     const router = useRouter();
     const { setCurrentClass } = useChildStore();
 
     const handleClick = useCallback(() => {
-        setCurrentClass({
-            codClass, 
-            subject, 
-            title, 
-            nameClass
-        } as Class);
-        router.push(`/activities/${getSubject(subject)}/${codClass}`);
+        setCurrentClass(props);
+        router.push(`/activities/class`);
     }, [codClass, subject, setCurrentClass]);
-
+  
   return (
     <StyledExerciseCard
       onClick={handleClick}

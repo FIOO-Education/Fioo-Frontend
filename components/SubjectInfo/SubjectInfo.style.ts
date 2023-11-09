@@ -9,7 +9,7 @@ export const StyledSubjectsInfo = styled("div")<{ color: string }>((props) => ({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "24px",
-    boxShadow: "4px 4px 12px 1px rgba(0, 0, 0, 0.15)",
+    boxShadow: "3px 3px 12px 1px rgba(0, 0, 0, 0.1)",
     border: `2px solid ${props.color}`,
     userSelect: "none",
     "& .subject-info-title": {

@@ -10,16 +10,16 @@ interface ProfileIconProps {
 }
 
 export default function ProfileIcon({ size, src, onClick }: ProfileIconProps) {
-  const userIcon = useChildStore((s) => s.userIcon);
+  const { student } = useChildStore();
   const [currentSource, setCurrentSource] = useState("");
 
   useEffect(() => {
-    if(!src) {
-      setCurrentSource(userIcon);
-    } else {
+    if(!src && student?.image) {
+      setCurrentSource(student.image);
+    } else if(src) {
       setCurrentSource(src);
     }
-  }, [src]);
+  }, [src, student?.image]);
 
   if (size === "big") {
     return (

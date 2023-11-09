@@ -2,8 +2,6 @@
 
 import ChangeIcon from "@/public/images/change-icon.svg";
 import InstagramIcon from "@/public/images/instagram-icon.svg";
-import WebIcon from "@/public/images/web-link-icon.svg";
-import AboutIcon from "@/public/images/about-icon.svg";
 import ConfigIcon from "@/public/images/config-icon.svg";
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -13,7 +11,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 export default function Page() {
     const router = useRouter();
-
     const [options, setOptions] = useState([
         {
             icon: ChangeIcon.src,
@@ -22,15 +19,8 @@ export default function Page() {
         },
         {
             icon: InstagramIcon.src,
-            text: "Instagram"
-        },
-        {
-            icon: WebIcon.src,
-            text: "Web"
-        },
-        {
-            icon: AboutIcon.src,
-            text: "Sobre"
+            text: "Instagram",
+            onClick: () => window.location.replace("https://www.instagram.com/fiooeducation/?hl=pt"),
         },
     ]);
 

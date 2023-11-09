@@ -7,37 +7,32 @@ import Image from "next/image";
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useChildStore } from "@/stores/use-child";
+import { Activity } from "@/public/entities/entities";
 
-interface LevelCardProps {
+export interface LevelCardProps {
   index: number;
-  level: string;
   current: boolean;
   currentIndex: number;
   color: string;
 }
 
-export default function LevelCard({
-  index,
-  level,
-  current,
-  currentIndex,
-  color,
-}: LevelCardProps) {
+export default function LevelCard({ levelCard, activity } : { levelCard: LevelCardProps, activity: Activity }) {
+  const { setCurrentQuiz } = useChildStore();
+  const {
+    index,
+    current,
+    currentIndex,
+    color,
+  } = levelCard;
   const router = useRouter();
-  const game = useChildStore((s) => s.game);
-  const setGame = useChildStore((s) => s.setGame);
 
-  const handleOnClick = useCallback(() => {
-    if (current) {
-      let tempGame = {...game};
-      tempGame.currentGame.id = index + 1;
-      setGame(tempGame);
-      router.push("/games/game");
-    }
-  }, [current, index, game]);
+  const handleClick = useCallback(() => {
+    setCurrentQuiz(activity)
+    router.push("/games/game");
+  }, [current, index]);
 
   return (
-    <StyledLevelCard color={color} onClick={handleOnClick}>
+    <StyledLevelCard color={color} onClick={handleClick}>
       <Image
         width={15}
         height={150}
@@ -45,7 +40,7 @@ export default function LevelCard({
         alt="Blocked step"
       />
       <div className="content">
-        <p>{level}</p>
+        <p>Nível {index + 1}</p>
         <Image src={Mascote.src} alt="Filote" width={60} height={85} />
       </div>
     </StyledLevelCard>

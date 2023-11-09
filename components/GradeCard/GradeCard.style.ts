@@ -2,11 +2,12 @@ import { colors } from "@/public/colors/colors";
 import { styled } from "@mui/system";
 
 export const StyledGradeCard = styled("div")<{ color: string, darkColor: string }>((props) => ({
+    boxSizing: "border-box",
     position: "relative",
-    width: "85%",
-    height: "75px",
+    width: "100%",
+    height: "85px",
     borderRadius: "16px",
-    padding: "8px 12px",
+    padding: 4,
     backgroundColor: props.color,
     display: "flex",
     justifyContent: "center",
@@ -14,7 +15,7 @@ export const StyledGradeCard = styled("div")<{ color: string, darkColor: string 
     color: colors.black,
     userSelect: "none",
     "& .subject-title": {
-        fontSize: "22px",
+        fontSize: "20px",
         fontWeight: "600",
     },
     "& section": {
@@ -32,7 +33,7 @@ export const StyledGradeCard = styled("div")<{ color: string, darkColor: string 
     "& > div": {
         width: "85%",
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
     },
     "& p": {

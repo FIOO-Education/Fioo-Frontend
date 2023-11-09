@@ -11,6 +11,8 @@ import ProfileActivityCard from "@/components/ProfileActivityCard/ProfileActivit
 import { useRouter, usePathname } from "next/navigation";
 import { useChildStore } from "@/stores/use-child";
 import { doGetConsecutiveDays } from "@/utils/req/do-get-consecutive-days";
+import LoadingGif from "@/components/LoadingGif/LoadingGif";
+import { doGetCurriculum } from "@/utils/req/do-get-curriculum";
 
 export default function Page() {
   const router = useRouter();
@@ -22,33 +24,21 @@ export default function Page() {
     description: string;
     theme: string;
   }[]>([]);
-  const [activity, setActivity] = useState([
-    {
-      title: "Tarefas",
-      description: "Que tal algumas atividades?",
-      theme: "green",
-      redirect: "/activities"
-    },
-    {
-      title: "Jogos",
-      description: "Que tal alguns jogos divertidos?",
-      theme: "pink",
-      redirect: "/games"
-    },
-  ]);
+  const [activity, setActivity] = useState<any[]>([]);
 
   const handleGetInfo = useCallback(async () => {
-    const consecutiveDays = (await doGetConsecutiveDays(student!.codstudent)).data;
+    // const consecutiveDays = (await doGetConsecutiveDays(student!.codstudent)).data;
+    const curr = (await doGetCurriculum(student!.codstudent)).data;
 
     setInfo([
       {
-        number: consecutiveDays,
+        number: 0,
         title: "Dias seguidos",
         description: "Jogando, aprendendo e se divertindo dentro do FIOO.",
         theme: "blue",
       },
       {
-        number: 13,
+        number: curr.length,
         title: "Atividades",
         description: "Já realizadas e aprendidas dentro do FIOO.",
         theme: "green",
@@ -58,7 +48,25 @@ export default function Page() {
 
   useEffect(() => {
     handleGetInfo();
+    setActivity([
+      {
+        title: "Tarefas",
+        description: "Que tal algumas atividades?",
+        theme: "green",
+        redirect: "/activities"
+      },
+      {
+        title: "Jogos",
+        description: "Que tal alguns jogos divertidos?",
+        theme: "pink",
+        redirect: "/games"
+      },
+    ]);
   }, []);
+
+  if(!activity.length || !info.length) {
+    return <LoadingGif center />;
+  }
 
   return (
     <div className="profile-page">

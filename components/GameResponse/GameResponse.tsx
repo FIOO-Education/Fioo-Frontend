@@ -4,43 +4,50 @@ import GameOptionCard from "../GameOptionCard/GameOptionCard";
 import { StyledGameResponse } from "./GameResponse.style";
 import ConfirmButton from "../ConfirmButton/ConfirmButton";
 import { colors } from "@/public/colors/colors";
+import { Alternative, Question } from "@/public/entities/entities";
+import Rino from "@/public/images/rinoceronte.jpg";
 
 interface GameResponseProps {
-  onClick: MouseEventHandler<HTMLDivElement>;
+  currentQuestion: number;
+  addAnswer: Function;
 }
 
-export default function GameResponse({ onClick }: GameResponseProps) {
-  const game = useChildStore((s) => s.game);
-  const [currentQuestion, setCurrentQuestion] = useState<number>(-1);
+export default function GameResponse({ currentQuestion, addAnswer }: GameResponseProps) {
+  const { currentQuiz } = useChildStore();
+  const [ question, setQuestion ] = useState<Alternative | null>(null)
+  const [ selected, setSelected ] = useState<number | undefined>(undefined);
 
   useEffect(() => {
-    setCurrentQuestion(game.currentQuestion - 1);
-  }, [game.currentQuestion]);
-
-  if (currentQuestion === -1) {
-    return null;
-  }
+    const curr = currentQuiz?.questions[currentQuestion].alternatives.find((el) => el.codAlternative === selected);
+    curr && setQuestion(curr);
+  }, [currentQuestion, selected]);
 
   return (
     <StyledGameResponse>
       <img
-        src={game.currentGame.questions[currentQuestion].imgSrc}
+        src={Rino.src}
         alt="Game Image"
         width="95%"
         height={200}
       />
       <p className="question-title">
-        {game.currentGame.questions[currentQuestion].question}
+        {currentQuiz?.questions[currentQuestion].question}
       </p>
       <section className="game-options">
-        {game.currentGame.questions[currentQuestion].options.map(
+        {currentQuiz?.questions[currentQuestion].alternatives.map(
           (el, index) => (
-            <GameOptionCard key={el.option} index={index} {...el} />
+            <GameOptionCard key={el.codAlternative} setSelected={setSelected} isSelected={el.codAlternative === selected} index={index} {...el} />
           )
         )}
       </section>
       <ConfirmButton
-        onClick={onClick}
+        onClick={() => {
+          if(selected !== undefined) {
+            setSelected(undefined);
+            setQuestion(null);
+            addAnswer(question);
+          }
+        }}
         text="Confirmar alternativa"
         color={colors.pink.pastel}
       />
