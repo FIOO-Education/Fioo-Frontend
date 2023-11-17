@@ -1,7 +1,7 @@
 import { MouseEventHandler, useCallback } from "react";
 import { StyledBackButton } from "./BackButton.style";
-import BlueInvertedArrow from "@/public/images/blue-inverted-arrow.png";
-import PinkInvertedArrow from "@/public/images/pink-inverted-arrow.png";
+import BlueInvertedArrow from "@/public/images/blue-inverted-arrow.svg";
+import PinkInvertedArrow from "@/public/images/pink-inverted-arrow.svg";
 
 interface BackButtonProps {
     color: "blue" | "pink";
@@ -24,8 +24,8 @@ export default function BackButton({ color, fixed, onClick }: BackButtonProps) {
       onClick={onClick}
       src={getImageSource(color)}
       alt="Inverted arrow"
-      width={10}
-      height={17.5}
+      width={25}
+      height={22.5}
     />
   );
 }
