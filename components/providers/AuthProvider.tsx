@@ -16,16 +16,16 @@ const AuthProvider = ({ children }: {
     const router = useRouter();
 
     const handleGetStudentInfo = useCallback(async () => {
-        if(typeof Android !== undefined) {
-            const guardianEmail = Android.returnEmail();
-            const data = await doGetStudentInfo(guardianEmail);
+        // if(typeof Android !== undefined) {
+            // const guardianEmail = Android.returnEmail();
+            const data = await doGetStudentInfo("adm@gmail.com");
             if(data.message === "Success") {
                 setStudent(data.data);
                 setIsLogged(true);
             }
-        } else {
-            router.push("/home");
-        }
+        // } else {
+            // router.push("/home");
+        // }
 
         setIsMounted(true);
     }, [setStudent, setIsLogged]);
