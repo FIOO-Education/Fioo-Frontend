@@ -20,7 +20,7 @@ const Page = () => {
 
   const handleGetActivity = useCallback(async (codClass: number) => {
     const data = await doGetActivity(codClass);
-    if(data.data.length) {
+    if(data.data && data.data.length) {
         setActivity(data.data[0]);
     }
   }, []);
@@ -86,7 +86,7 @@ const Page = () => {
       </h3>
       <VideoInfo
         color={currentClass.subject === "Língua Portuguesa" ? "pink" : "blue"}
-        duration={""}
+        duration={"1h20m"}
         level="Matemática Nível I"
       />
       <p
