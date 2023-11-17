@@ -1,6 +1,6 @@
 "use client";
 
-declare const Android: any;
+// declare const Android: any;
 import { useChildStore } from "@/stores/use-child";
 import { doGetStudentInfo } from "@/utils/req/do-get-student-info";
 import { usePathname, useRouter } from "next/navigation";
