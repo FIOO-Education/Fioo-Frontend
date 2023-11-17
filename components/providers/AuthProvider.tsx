@@ -18,7 +18,7 @@ const AuthProvider = ({ children }: {
     const handleGetStudentInfo = useCallback(async () => {
         if(typeof Android !== undefined) {
             const guardianEmail = Android.returnEmail();
-            const data = await doGetStudentInfo("adm@gmail.com");
+            const data = await doGetStudentInfo(guardianEmail);
             if(data.message === "Success") {
                 setStudent(data.data);
                 setIsLogged(true);
