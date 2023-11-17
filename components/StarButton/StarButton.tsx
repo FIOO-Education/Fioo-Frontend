@@ -23,16 +23,6 @@ export default function StarButton({
 
   const handleClick = useCallback(() => {
     setFavorited(!favorited);
-    const fav = localStorage.getItem("fav");
-    const favorite = fav ? JSON.parse(fav) as string[] : [];
-    if (!favorited && !favorite.includes(el)) {
-      localStorage.setItem("fav", JSON.stringify([...favorite, el]));
-    } else {
-      localStorage.setItem(
-        "fav",
-        JSON.stringify(favorite.filter((favo) => favo !== el))
-      );
-    }
   }, [favorited, setFavorited]);
 
   const getImageSource = useCallback(
