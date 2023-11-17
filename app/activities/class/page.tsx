@@ -45,14 +45,6 @@ const Page = () => {
     }
   }, [currentClass]);
 
-  useEffect(() => {
-    let fav = localStorage.getItem("fav");
-    if(fav) {
-        const isFavorited = (JSON.parse(fav) as string[]).find((el) => el === currentClass?.nameClass);
-        if(isFavorited) setFavorite(true);
-    }
-  }, []);
-
   if (!currentClass) {
     return <></>;
   }

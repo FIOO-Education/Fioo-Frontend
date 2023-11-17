@@ -1,6 +1,6 @@
 "use client";
 
-// declare const Android: any;
+declare const Android: any;
 import { useChildStore } from "@/stores/use-child";
 import { doGetStudentInfo } from "@/utils/req/do-get-student-info";
 import { usePathname, useRouter } from "next/navigation";
@@ -16,16 +16,16 @@ const AuthProvider = ({ children }: {
     const router = useRouter();
 
     const handleGetStudentInfo = useCallback(async () => {
-        // if(typeof Android !== undefined) {
-            // const guardianEmail = Android.returnEmail();
+        if(typeof Android !== undefined) {
+            const guardianEmail = Android.returnEmail();
             const data = await doGetStudentInfo("adm@gmail.com");
             if(data.message === "Success") {
                 setStudent(data.data);
                 setIsLogged(true);
             }
-        // } else {
-            // router.push("/home");
-        // }
+        } else {
+            router.push("/home");
+        }
 
         setIsMounted(true);
     }, [setStudent, setIsLogged]);
