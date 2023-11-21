@@ -3,7 +3,6 @@ import { styled } from "@mui/system";
 
 export const StyledGameResponse = styled("div")(({
     "& > .game-options": {
-        maxWidth: 400,
         display: "flex",
         justifyContent: "center",
         flexWrap: "wrap",

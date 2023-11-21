@@ -6,7 +6,7 @@ export const StyledGameOptionCard = styled("div")<{
   fontColor: string;
   isSelected: boolean;
 }>((props) => ({
-  width: "140px",
+  width: "45%",
   height: "120px",
   display: "flex",
   justifyContent: "center",
