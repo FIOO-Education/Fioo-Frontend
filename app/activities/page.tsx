@@ -11,6 +11,8 @@ import { useChildStore } from "@/stores/use-child";
 import { doGetCurriculum } from "@/utils/req/do-get-curriculum";
 import { Curriculum } from "@/public/entities/entities";
 import LoadingGif from "@/components/LoadingGif/LoadingGif";
+import { Activity } from "@/out/entities/entities";
+import { doGetActivityId } from "@/utils/req/do-get-activity-id";
 
 const Page = () => {
   const { student } = useChildStore();
@@ -29,12 +31,20 @@ const Page = () => {
       color: colors.pink.radiant,
     },
   ]);
-  const [grades, setGrades] = useState<Curriculum[]>([]);
+  const [grades, setGrades] = useState<(Curriculum & Activity)[]>([]);
 
   const handleGetCurriculum = useCallback(
     async (codStudent: number) => {
       const data = await doGetCurriculum(codStudent);
-      setGrades(data.data);
+      const final = await Promise.all(data.data.filter((el) => el.codActivity).map(async (el) => {
+        const ac = (await doGetActivityId(el.codActivity)).data;
+        return {
+          ...el,
+          ...ac
+        };
+      }));
+           
+      setGrades(final);
       setIsLoading(false);
     },
     [student, setIsLoading]

@@ -25,7 +25,7 @@ export default function GameResponse({ currentQuestion, addAnswer }: GameRespons
   return (
     <StyledGameResponse>
       <img
-        src={Rino.src}
+        src={currentQuiz?.questions[currentQuestion].image}
         alt="Game Image"
         width="95%"
         height={200}

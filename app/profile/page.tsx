@@ -28,7 +28,7 @@ export default function Page() {
 
   const handleGetInfo = useCallback(async () => {
     // const consecutiveDays = (await doGetConsecutiveDays(student!.codstudent)).data;
-    const curr = (await doGetCurriculum(student!.codstudent)).data;
+    const curr = (await doGetCurriculum(student!.codstudent)).data.filter((el) => el.codActivity);
 
     setInfo([
       {
