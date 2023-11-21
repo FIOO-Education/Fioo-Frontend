@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { StyledGradeCard } from "./GradeCard.style";
 import { Curriculum } from "@/public/entities/entities";
 import { getSubject } from "@/utils/get-subject";
-import { Activity } from "@/out/entities/entities";
+import { Activity } from "@/public/entities/entities";
 import LoadingGif from "../LoadingGif/LoadingGif";
 import { doGetActivityId } from "@/utils/req/do-get-activity-id";
 
