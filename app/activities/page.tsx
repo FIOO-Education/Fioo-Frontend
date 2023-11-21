@@ -1,7 +1,6 @@
 "use client";
 
 import GradeCard from "@/components/GradeCard/GradeCard";
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import styles from "./page.module.css";
 import SubjectsInfo from "@/components/SubjectInfo/SubjectInfo";
@@ -11,7 +10,7 @@ import { useChildStore } from "@/stores/use-child";
 import { doGetCurriculum } from "@/utils/req/do-get-curriculum";
 import { Curriculum } from "@/public/entities/entities";
 import LoadingGif from "@/components/LoadingGif/LoadingGif";
-import { Activity } from "@/out/entities/entities";
+import { Activity } from "@/public/entities/entities";
 import { doGetActivityId } from "@/utils/req/do-get-activity-id";
 
 const Page = () => {
