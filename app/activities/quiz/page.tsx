@@ -86,7 +86,7 @@ const QuizPage = () => {
             await doPostCurriculum({
               codStudent: student.codstudent,
               codActivity: currentQuiz.codActivity,
-              grade: totalQuestion / rightAnswer,
+              grade: 10 / totalQuestion * rightAnswer,
               realizationDate: rDate,
             });
             router.push("/activities/quiz/result");
