@@ -3,10 +3,12 @@ import { styled } from "@mui/system";
 
 export const StyledGameResponse = styled("div")(({
     "& > .game-options": {
+        maxWidth: 400,
         display: "flex",
         justifyContent: "center",
         flexWrap: "wrap",
-        gap: "10px 20px"
+        gap: "10px 20px",
+        margin: "0 auto"
     },
     "& > .question-title": {
         fontSize: "30px",
