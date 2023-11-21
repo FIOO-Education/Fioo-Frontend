@@ -27,8 +27,8 @@ export default function GameResponse({ currentQuestion, addAnswer }: GameRespons
       <img
         src={currentQuiz?.questions[currentQuestion].image}
         alt="Game Image"
-        width="95%"
-        height={200}
+        height={300}
+        style={{ maxWidth: "95%" }}
       />
       <p className="question-title">
         {currentQuiz?.questions[currentQuestion].question}
